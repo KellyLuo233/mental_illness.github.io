@@ -1,0 +1,32 @@
+name: "Website Settings"
+output_dir: "."
+navbar:
+  title: "Home"
+  left:
+      - icon: fa-github fa-lg
+        href: https://github.com/KellyLuo233/mental_illness.github.io.git
+  right:
+    - text: Sections
+      menu:
+      - text: "Data Process"
+        href: data_process.html
+      - text: "Mental Illness"
+        href: mental_illness.html
+      - text: "Anxiety Trend Dashboard"
+        href: anxiety_trend_dashboard.html
+      - text: "Anxiety Trend"
+        href: anxiety_trend.html   
+      - text: "Depression Trend Dashboard"
+        href: depression_trend_dashboard.html
+      - text: "Depression Trend"
+        href: depression_trend.html
+      - text: "Suicide Analysis"
+        href: suicide_analysis.html
+      - text: "Statistical Analysis"
+        href: statistical_analysis.html
+      - text: "Project Report"
+        href: project_report.html
+      
+output:
+  html_document:
+    theme: flatly

@@ -1,0 +1,143 @@
+---
+title: "Data Process"
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(viridis)
+library(plotly)
+library(mgcv)
+library(modelr)
+library(ggmosaic)
+
+library(lmtest)
+library(performance)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+
+library(usmap)
+library(gridExtra)
+library(dplyr)
+library(readxl)
+
+
+knitr::opts_chunk$set(
+	echo = TRUE,
+	warning = FALSE,
+	fig.width = 9, 
+  fig.height = 6,
+  out.width = "90%"
+)
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+theme_set(
+  theme_minimal() + 
+    theme(
+      legend.position = "bottom",
+      plot.title = element_text(hjust = 0.5)
+    )  
+)
+```
+
+
+## Data Source
+
+**IPUMS Health Surveys:** 
+NHIS is a harmonized set of data covering more than 50 years (1963-present) of the National Health Interview Survey (NHIS). The NHIS is the principal source of information on the health of the U.S. population, covering such topics as general health status, the distribution of acute and chronic illness, functional limitations, access to and use of medical services, insurance coverage, and health behaviors. On average, the survey covers 100,000 persons in 45,000 households each year. The IPUMS NHIS facilitates cross-time comparisons of these invaluable survey data by coding variables identically across time. Our analysis will use data from 2015 to 2021, which covers the COVID-19 period. 
+
+**National Survey on Drug Use and Health (NSDUH):**
+Substance Abuse and Mental Health Services Administration (SAMHSA), Center for Behavioral Health Statistics and Quality, National Survey on Drug Use and Health (NSDUH), 2019 and 2020.
+
+**Centers for Disease Control and Prevention (CDC):**
+National Center for Injury Prevention and Control. Web-based Injury Statistics Query and Reporting System (WISQARS) (2014-2020).
+National Center for Health Statistics, National Vital Statistics System, Mortality. Data were retrieved using NVSS multiple cause-of-death mortality files for 2000 through 2020. Suicide deaths were identified using International Classification of Diseases, 10th Revision (ICD–10) underlying cause-of-death codes U03, X60–X84, and Y87.0. Means of suicide were identified using ICD–10 codes X72–X74 for firearm, X60–X69 for poisoning, and X70 for suffocation. “Other means” includes: Cut or pierce; Drowning; Falls; Fire or flame; Other land transport; Struck by or against; Other specified, classifiable injury; Other specified, not elsewhere classified injury; and Unspecified injury, as classified by ICD–10.
+
+
+## Data Cleaning
+
+We pulled out data from IPUMS Health Surveys: NHIS and will limit our analysis using data from 2015 to 2021. To analyze the trend of anxiety prevalence, frequency and level from 2015 to 2021, we will focus on anxiety indicators listed below:
+
+- WORFREQ:How often feel worried, nervous, or anxious
+- WORRX: Take medication for worried, nervous, or anxious feelings
+- WORFEELEVL: Level of worried, nervous, or anxious feelings, last time
+
+To analyze the trend of depression prevalence, frequency and level from 2015 to 2021, we will focus on depression indicators listed below:
+
+- DEPRX:Take medication for depression
+- DEPFREQ:How often feel depressed
+- DEPFEELEVL: Level of depression, last time depressed
+
+Core demographic and Social economic status indicators listed below are also included in this analysis:
+
+- AGE:Age, individuals with age above 85 is excluded from analysis as 85 is the top code.
+- SEX:Biological sex
+- MARST:Current marital status
+- POVERTY:Ratio of family income to poverty threshold
+
+Responses indicate Unknown or not applied are excluded from our analysis.
+
+```{r, message=FALSE}
+anx_dep = 
+  read_csv("data/nhis_data01.csv") %>% 
+  janitor::clean_names() %>% 
+  filter(year>=2015) %>% 
+  select(year, worrx, worfreq, worfeelevl, deprx, depfreq, depfeelevl, age, sex, marst, poverty) %>% 
+  mutate(
+    sex = recode_factor(sex, 
+                        "1" = "Male", 
+                        "2" = "Female"),
+    marst = recode_factor(marst, 
+                        "10" = "Married", "11" = "Married", "12" = "Married", "13" = "Married",
+                        "20" = "Widowed",
+                        "30" = "Divorced",
+                        "40" = "Separated",
+                        "50" = "Never married"),
+    poverty = recode_factor(poverty, 
+                        "11" = "Less than 1.0", "12" = "Less than 1.0", 
+                        "13" = "Less than 1.0", "14" = "Less than 1.0",
+                        "21" = "1.0-2.0", "22" = "1.0-2.0", 
+                        "23" = "1.0-2.0", "24" = "1.0-2.0", 
+                        "25" = "1.0-2.0",
+                        "31" = "2.0 and above","32" = "2.0 and above",
+                        "33" = "2.0 and above","34" = "2.0 and above",
+                        "35" = "2.0 and above","36" = "2.0 and above",
+                        "37" = "2.0 and above","38" = "2.0 and above"),
+    worrx = recode_factor(worrx,
+                          '1' = "no", 
+                          '2' = "yes"),
+    worfreq = recode_factor(worfreq, 
+                            '1' = "Daily", 
+                            '2' = "Weekly", 
+                            '3' = "Monthly", 
+                            '4' = "A few times a year", 
+                            '5' = "Never"),
+    worfeelevl = recode_factor(worfeelevl, 
+                               '1' = "A lot", 
+                               '3' = "Somewhere between a little and a lot", 
+                               '2' = "A little"),
+    deprx = recode_factor(deprx, '1' = "no", '2' = "yes"),
+    depfreq = recode_factor(depfreq, '1' = "Daily", '2' = "Weekly", 
+                            '3' = "Monthly", '4' = "A few times a year", 
+                            '5' = "Never"),
+    depfeelevl = recode_factor(depfeelevl, '1' = "A lot", 
+                               '3' = "Somewhere between a little and a lot", 
+                               '2' = "A little"),
+    age = ifelse(age>=85, NA, age)
+    )
+```
+
+
+

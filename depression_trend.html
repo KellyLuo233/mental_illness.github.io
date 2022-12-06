@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Depression Trend</title>
+
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="https://github.com/KellyLuo233/mental_illness.github.io.git">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="data_process.html">Data Process</a>
+</li>
+<li>
+  <a href="mental_illness.html">Mental Illness</a>
+</li>
+<li>
+  <a href="anxiety_trend_dashboard.html">Anxiety Trend Dashboard</a>
+</li>
+<li>
+  <a href="anxiety_trend.html">Anxiety Trend</a>
+</li>
+<li>
+  <a href="depression_trend_dashboard.html">Depression Trend Dashboard</a>
+</li>
+<li>
+  <a href="depression_trend.html">Depression Trend</a>
+</li>
+<li>
+  <a href="suicide_analysis.html">Suicide Analysis</a>
+</li>
+<li>
+  <a href="statistical_analysis.html">Statistical Analysis</a>
+</li>
+<li>
+  <a href="project_report.html">Project Report</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Depression Trend</h1>
+
+</div>
+
+
+<pre class="r"><code>anx_dep = 
+  read_csv(&quot;data/nhis_data01.csv&quot;) %&gt;% 
+  janitor::clean_names() %&gt;% 
+  filter(year&gt;=2015) %&gt;% 
+  select(year, worrx, worfreq, worfeelevl, deprx, depfreq, depfeelevl, age, sex, marst, poverty) %&gt;% 
+  mutate(
+    sex = recode_factor(sex, 
+                        &quot;1&quot; = &quot;Male&quot;, 
+                        &quot;2&quot; = &quot;Female&quot;),
+    marst = recode_factor(marst, 
+                        &quot;10&quot; = &quot;Married&quot;, &quot;11&quot; = &quot;Married&quot;, &quot;12&quot; = &quot;Married&quot;, &quot;13&quot; = &quot;Married&quot;,
+                        &quot;20&quot; = &quot;Widowed&quot;,
+                        &quot;30&quot; = &quot;Divorced&quot;,
+                        &quot;40&quot; = &quot;Separated&quot;,
+                        &quot;50&quot; = &quot;Never married&quot;),
+    poverty = recode_factor(poverty, 
+                        &quot;11&quot; = &quot;Less than 1.0&quot;, &quot;12&quot; = &quot;Less than 1.0&quot;, 
+                        &quot;13&quot; = &quot;Less than 1.0&quot;, &quot;14&quot; = &quot;Less than 1.0&quot;,
+                        &quot;21&quot; = &quot;1.0-2.0&quot;, &quot;22&quot; = &quot;1.0-2.0&quot;, 
+                        &quot;23&quot; = &quot;1.0-2.0&quot;, &quot;24&quot; = &quot;1.0-2.0&quot;, 
+                        &quot;25&quot; = &quot;1.0-2.0&quot;,
+                        &quot;31&quot; = &quot;2.0 and above&quot;,&quot;32&quot; = &quot;2.0 and above&quot;,
+                        &quot;33&quot; = &quot;2.0 and above&quot;,&quot;34&quot; = &quot;2.0 and above&quot;,
+                        &quot;35&quot; = &quot;2.0 and above&quot;,&quot;36&quot; = &quot;2.0 and above&quot;,
+                        &quot;37&quot; = &quot;2.0 and above&quot;,&quot;38&quot; = &quot;2.0 and above&quot;),
+    worrx = recode_factor(worrx,
+                          &#39;1&#39; = &quot;no&quot;, 
+                          &#39;2&#39; = &quot;yes&quot;),
+    worfreq = recode_factor(worfreq, 
+                            &#39;1&#39; = &quot;Daily&quot;, 
+                            &#39;2&#39; = &quot;Weekly&quot;, 
+                            &#39;3&#39; = &quot;Monthly&quot;, 
+                            &#39;4&#39; = &quot;A few times a year&quot;, 
+                            &#39;5&#39; = &quot;Never&quot;),
+    worfeelevl = recode_factor(worfeelevl, 
+                               &#39;1&#39; = &quot;A lot&quot;, 
+                               &#39;3&#39; = &quot;Somewhere between a little and a lot&quot;, 
+                               &#39;2&#39; = &quot;A little&quot;),
+    deprx = recode_factor(deprx, &#39;1&#39; = &quot;no&quot;, &#39;2&#39; = &quot;yes&quot;),
+    depfreq = recode_factor(depfreq, &#39;1&#39; = &quot;Daily&quot;, &#39;2&#39; = &quot;Weekly&quot;, 
+                            &#39;3&#39; = &quot;Monthly&quot;, &#39;4&#39; = &quot;A few times a year&quot;, 
+                            &#39;5&#39; = &quot;Never&quot;),
+    depfeelevl = recode_factor(depfeelevl, &#39;1&#39; = &quot;A lot&quot;, 
+                               &#39;3&#39; = &quot;Somewhere between a little and a lot&quot;, 
+                               &#39;2&#39; = &quot;A little&quot;),
+    age = ifelse(age&gt;=85, NA, age)
+    )</code></pre>
+<div id="depression-trend" class="section level2">
+<h2>Depression Trend</h2>
+<div id="percentage-of-people-reported-taken-medication-for-depression"
+class="section level3">
+<h3>Percentage of people reported taken medication for depression</h3>
+<p>According to the plot, the proportion of people reported taken
+medication for depression increased from 8.75% in 2015 to 11.42% in
+2020, followed by a slight decrease from 2020 to 2021. COVID-19 appears
+to have a limited impact on depression.</p>
+<pre class="r"><code>anx_dep %&gt;%
+  drop_na(deprx) %&gt;% 
+  group_by(year, deprx) %&gt;% 
+  summarize(dep_num = n()) %&gt;% 
+  pivot_wider(
+    names_from = deprx,
+    values_from = dep_num
+  ) %&gt;% 
+  mutate(
+    dep_percentage = yes/(no + yes)*100,
+    text_label = str_c(yes, &quot; out of &quot;, no + yes)
+  ) %&gt;% 
+  ungroup() %&gt;% 
+  plot_ly(
+    y = ~dep_percentage,
+    x = ~year,
+    color = ~year,
+    type = &quot;bar&quot;, 
+    colors = &quot;viridis&quot;,
+    text = ~text_label
+  ) %&gt;% 
+  layout(
+    xaxis = list (title = &quot;&quot;),
+    yaxis = list (title = &quot;Percentage&quot;),
+    showlegend = FALSE
+  ) %&gt;% 
+  hide_colorbar()</code></pre>
+<div id="htmlwidget-0de434c8b2fb89803ead" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0de434c8b2fb89803ead">{"x":{"visdat":{"c1b875755820":["function () ","plotlyVisDat"]},"cur_data":"c1b875755820","attrs":{"c1b875755820":{"y":{},"x":{},"text":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":""},"yaxis":{"domain":[0,1],"automargin":true,"title":"Percentage"},"showlegend":false,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"y":[8.74678663239075,9.78260869565217,9.95950786481857,10.6114158033719,10.967434471803,11.4224276269337,11.4172818966414],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["1361 out of 15560","1548 out of 15824","1279 out of 12842","2612 out of 24615","3452 out of 31475","3559 out of 31158","3294 out of 28851"],"type":"bar","marker":{"colorbar":{"title":"year","ticklen":2},"cmin":2015,"cmax":2021,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(71,17,100,1)"],["0.0833333333333333","rgba(72,31,112,1)"],["0.125","rgba(71,45,123,1)"],["0.166666666666667","rgba(68,58,131,1)"],["0.208333333333333","rgba(64,70,136,1)"],["0.25","rgba(59,82,139,1)"],["0.291666666666667","rgba(54,93,141,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(44,114,142,1)"],["0.416666666666667","rgba(40,124,142,1)"],["0.458333333333333","rgba(36,134,142,1)"],["0.5","rgba(33,144,141,1)"],["0.541666666666667","rgba(31,154,138,1)"],["0.583333333333333","rgba(32,164,134,1)"],["0.625","rgba(39,173,129,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(71,193,110,1)"],["0.75","rgba(93,200,99,1)"],["0.791666666666667","rgba(117,208,84,1)"],["0.833333333333333","rgba(143,214,68,1)"],["0.875","rgba(170,220,50,1)"],["0.916666666666667","rgba(199,224,32,1)"],["0.958333333333333","rgba(227,228,24,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[2015,2016,2017,2018,2019,2020,2021],"line":{"colorbar":{"title":"","ticklen":2},"cmin":2015,"cmax":2021,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(71,17,100,1)"],["0.0833333333333333","rgba(72,31,112,1)"],["0.125","rgba(71,45,123,1)"],["0.166666666666667","rgba(68,58,131,1)"],["0.208333333333333","rgba(64,70,136,1)"],["0.25","rgba(59,82,139,1)"],["0.291666666666667","rgba(54,93,141,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(44,114,142,1)"],["0.416666666666667","rgba(40,124,142,1)"],["0.458333333333333","rgba(36,134,142,1)"],["0.5","rgba(33,144,141,1)"],["0.541666666666667","rgba(31,154,138,1)"],["0.583333333333333","rgba(32,164,134,1)"],["0.625","rgba(39,173,129,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(71,193,110,1)"],["0.75","rgba(93,200,99,1)"],["0.791666666666667","rgba(117,208,84,1)"],["0.833333333333333","rgba(143,214,68,1)"],["0.875","rgba(170,220,50,1)"],["0.916666666666667","rgba(199,224,32,1)"],["0.958333333333333","rgba(227,228,24,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[2015,2016,2017,2018,2019,2020,2021]}},"xaxis":"x","yaxis":"y","frame":null},{"x":[2015,2021],"y":[8.74678663239075,11.4224276269337],"type":"scatter","mode":"markers","opacity":0,"hoverinfo":"none","showlegend":false,"marker":{"colorbar":{"title":"year","ticklen":2},"cmin":2015,"cmax":2021,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(71,17,100,1)"],["0.0833333333333333","rgba(72,31,112,1)"],["0.125","rgba(71,45,123,1)"],["0.166666666666667","rgba(68,58,131,1)"],["0.208333333333333","rgba(64,70,136,1)"],["0.25","rgba(59,82,139,1)"],["0.291666666666667","rgba(54,93,141,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(44,114,142,1)"],["0.416666666666667","rgba(40,124,142,1)"],["0.458333333333333","rgba(36,134,142,1)"],["0.5","rgba(33,144,141,1)"],["0.541666666666667","rgba(31,154,138,1)"],["0.583333333333333","rgba(32,164,134,1)"],["0.625","rgba(39,173,129,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(71,193,110,1)"],["0.75","rgba(93,200,99,1)"],["0.791666666666667","rgba(117,208,84,1)"],["0.833333333333333","rgba(143,214,68,1)"],["0.875","rgba(170,220,50,1)"],["0.916666666666667","rgba(199,224,32,1)"],["0.958333333333333","rgba(227,228,24,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[2015,2021],"line":{"color":"rgba(255,127,14,1)"}},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="stratify-by-biological-sex" class="section level4">
+<h4>Stratify by Biological sex</h4>
+<p>Stratify the reported percentage of people taking medication for
+depression by biological sex, we can observe a much higher percentage
+among females than males. There are also a faster increase in the
+percentage among females from 12.68% in 2017 to 15.14% in 2020 and a
+decrease from 15.14% in 2020 to 14.52% in 2021. The decrease may
+indicate that COVID-19 can be a protective factor against depression
+among females. Contrary to females, the percentage slightly decreased
+from 2018 to 2019 and then increased from 2020 to 2021 among males.</p>
+<pre class="r"><code>anx_dep %&gt;%
+  drop_na(sex, deprx) %&gt;% 
+  group_by(sex, year, deprx) %&gt;% 
+  summarize(dep_num = n()) %&gt;% 
+  pivot_wider(
+    names_from = deprx,
+    values_from = dep_num
+  ) %&gt;% 
+  mutate(
+    dep_percentage = yes/(no + yes)*100,
+    text_label = str_c(yes, &quot; out of &quot;, no + yes)
+  ) %&gt;% 
+  ungroup() %&gt;% 
+  plot_ly(
+    y = ~dep_percentage,
+    x = ~year,
+    color = ~sex,
+    type = &quot;bar&quot;, 
+    colors = &quot;viridis&quot;,
+    text = ~text_label
+  ) %&gt;% 
+  add_trace(
+    x = ~year,
+    y = ~dep_percentage,
+    color = ~sex,
+    type=&#39;scatter&#39;,
+    mode=&#39;lines+markers&#39;
+  ) %&gt;% 
+  layout(
+    xaxis = list (title = &quot;&quot;),
+    yaxis = list (title = &quot;Percentage&quot;),
+    legend = list(orientation = &#39;h&#39;)
+  )</code></pre>
+<div id="htmlwidget-e578ef30d4f5f37de9ba" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e578ef30d4f5f37de9ba">{"x":{"visdat":{"c1b8756c7855":["function () ","plotlyVisDat"]},"cur_data":"c1b8756c7855","attrs":{"c1b8756c7855":{"y":{},"x":{},"text":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"c1b8756c7855.1":{"y":{},"x":{},"text":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","mode":"lines+markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":""},"yaxis":{"domain":[0,1],"automargin":true,"title":"Percentage"},"legend":{"orientation":"h"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"y":[5.69303390072951,6.52625744769295,6.69520547945205,7.09384190357366,6.98780235683275,7.06817231283982,7.68409004196871],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["398 out of 6991","471 out of 7217","391 out of 5840","796 out of 11221","1014 out of 14511","1014 out of 14346","1007 out of 13105"],"type":"bar","name":"Male","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[11.2381841521764,12.5130707563611,12.6820908311911,13.5583096909064,14.3741524674253,15.1397977394408,14.5198170731707],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["963 out of 8569","1077 out of 8607","888 out of 7002","1816 out of 13394","2438 out of 16961","2545 out of 16810","2286 out of 15744"],"type":"bar","name":"Female","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[5.69303390072951,6.52625744769295,6.69520547945205,7.09384190357366,6.98780235683275,7.06817231283982,7.68409004196871],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["398 out of 6991","471 out of 7217","391 out of 5840","796 out of 11221","1014 out of 14511","1014 out of 14346","1007 out of 13105"],"type":"scatter","mode":"lines+markers","name":"Male","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[11.2381841521764,12.5130707563611,12.6820908311911,13.5583096909064,14.3741524674253,15.1397977394408,14.5198170731707],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["963 out of 8569","1077 out of 8607","888 out of 7002","1816 out of 13394","2438 out of 16961","2545 out of 16810","2286 out of 15744"],"type":"scatter","mode":"lines+markers","name":"Female","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="stratify-by-ratio-of-family-income-to-poverty-threshold"
+class="section level4">
+<h4>Stratify by ratio of family income to poverty threshold</h4>
+<p>Stratify the percentage of people reported taken medication for
+depression by the ratio of household income to the poverty line, we can
+clearly see that the poorer the household, the higher their percentage.
+The percentage among the poorest stratum decreased from 17.41% in 2017
+to 16.53% in 2018, which is the opposite of what happened in the other
+two strata. The change in the percentage is quite stable from 2018 to
+2019 among all three strata. There is a rapid increase from 17.02% in
+2019 to 18.66% in 2020, which may indicate that people belonging to the
+poorest stratum are affected by COVID-19 related depression. From 2020
+to 2021, the percentage decreases for the other two strata, while for
+the richest strata, the percentage increases.</p>
+<pre class="r"><code>anx_dep %&gt;%
+  drop_na(poverty, deprx) %&gt;% 
+  group_by(poverty, year, deprx) %&gt;% 
+  summarize(dep_num = n()) %&gt;% 
+  pivot_wider(
+    names_from = deprx,
+    values_from = dep_num
+  ) %&gt;% 
+  mutate(
+    dep_percentage = yes/(no + yes)*100,
+    text_label = str_c(yes, &quot; out of &quot;, no + yes)
+  ) %&gt;% 
+  ungroup() %&gt;% 
+  plot_ly(
+    y = ~dep_percentage,
+    x = ~year,
+    color = ~poverty,
+    type = &quot;scatter&quot;, 
+    mode = &quot;lines+markers&quot;,
+    colors = &quot;viridis&quot;,
+    text = ~text_label
+  ) %&gt;% 
+  layout(
+    xaxis = list (title = &quot;&quot;),
+    yaxis = list (title = &quot;Percentage&quot;),
+    legend = list(orientation = &#39;h&#39;)
+  )</code></pre>
+<div id="htmlwidget-864bf3a94d078599bfe6" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-864bf3a94d078599bfe6">{"x":{"visdat":{"c1b87c1e4102":["function () ","plotlyVisDat"]},"cur_data":"c1b87c1e4102","attrs":{"c1b87c1e4102":{"y":{},"x":{},"mode":"lines+markers","text":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":""},"yaxis":{"domain":[0,1],"automargin":true,"title":"Percentage"},"legend":{"orientation":"h"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"y":[13.8428874734607,14.9012567324955,17.4046740467405,16.5337200870196,17.0218894009217,18.6618444846293,16.8627450980392],"x":[2015,2016,2017,2018,2019,2020,2021],"mode":"lines+markers","text":["326 out of 2355","332 out of 2228","283 out of 1626","456 out of 2758","591 out of 3472","516 out of 2765","473 out of 2805"],"type":"scatter","name":"Less than 1.0","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[9.73251691911054,11.3991477272727,11.4947751022263,13.2905373276272,13.9187049093788,13.6168552477565,13.1857171354478],"x":[2015,2016,2017,2018,2019,2020,2021],"mode":"lines+markers","text":["302 out of 3103","321 out of 2816","253 out of 2201","559 out of 4206","791 out of 5683","698 out of 5126","661 out of 5013"],"type":"scatter","name":"1.0-2.0","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[7.3773987206823,8.52720918622067,8.38273654256581,9.11447344625957,9.2741935483871,10.078652168307,10.2695763799743],"x":[2015,2016,2017,2018,2019,2020,2021],"mode":"lines+markers","text":["692 out of 9380","854 out of 10015","707 out of 8434","1512 out of 16589","2070 out of 22320","2345 out of 23267","2160 out of 21033"],"type":"scatter","name":"2.0 and above","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="stratify-by-current-martial-status" class="section level4">
+<h4>Stratify by current martial status</h4>
+<p>Stratify the percentage of people reported taken medication for
+depression by current martial status, we can observe a rapid decrease
+from 17.26% in 2016 to 13.12% in 2019 among separated, while this
+downward trend slows from 2018 to 2019 and reverses from 2019 to 2020.
+The trends are similar for married and never married, divorced and
+widowed. the effect of COVID-19 is not evident in this plot.</p>
+<pre class="r"><code>anx_dep %&gt;%
+  drop_na(marst, deprx) %&gt;% 
+  group_by(marst, year, deprx) %&gt;% 
+  summarize(dep_num = n()) %&gt;% 
+  pivot_wider(
+    names_from = deprx,
+    values_from = dep_num
+  ) %&gt;% 
+  mutate(
+    dep_percentage = yes/(no + yes)*100,
+    text_label = str_c(yes, &quot; out of &quot;, no + yes)
+  ) %&gt;% 
+  ungroup() %&gt;% 
+  plot_ly(
+    y = ~dep_percentage,
+    x = ~year,
+    color = ~marst,
+    type = &quot;scatter&quot;,
+    mode=&#39;lines+markers&#39;,
+    colors = &quot;viridis&quot;,
+    text = ~text_label
+  ) %&gt;% 
+  layout(
+    xaxis = list (title = &quot;&quot;),
+    yaxis = list (title = &quot;Percentage&quot;),
+    legend = list(orientation = &#39;h&#39;)
+  )</code></pre>
+<div id="htmlwidget-8c476ee438de84004273" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8c476ee438de84004273">{"x":{"visdat":{"c1b815832198":["function () ","plotlyVisDat"]},"cur_data":"c1b815832198","attrs":{"c1b815832198":{"y":{},"x":{},"mode":"lines+markers","text":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":""},"yaxis":{"domain":[0,1],"automargin":true,"title":"Percentage"},"legend":{"orientation":"h"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"y":[7.3216885007278,7.85176771262246,8.12577283165518,8.70733673743617,9.09399159093992,9.70556161395856,9.89322780557007],"x":[2015,2016,2017,2018,2019,2020,2021],"mode":"lines+markers","text":["503 out of 6870","553 out of 7043","460 out of 5661","972 out of 11163","1341 out of 14746","1424 out of 14672","1325 out of 13393"],"type":"scatter","name":"Married","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[11.0397946084724,11.25,11.085626911315,12.9096722621902,14.227258419893,13.9938080495356,12.7975163849603],"x":[2015,2016,2017,2018,2019,2020,2021],"mode":"lines+markers","text":["172 out of 1558","180 out of 1600","145 out of 1308","323 out of 2502","452 out of 3177","452 out of 3230","371 out of 2899"],"type":"scatter","name":"Widowed","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"textfont":{"color":"rgba(59,82,139,1)"},"error_y":{"color":"rgba(59,82,139,1)"},"error_x":{"color":"rgba(59,82,139,1)"},"line":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[11.9240097008892,15.0837988826816,15.2850982271203,14.8157432940587,16.0782731490821,15.7700961341788,15.5211652253072],"x":[2015,2016,2017,2018,2019,2020,2021],"mode":"lines+markers","text":["295 out of 2474","378 out of 2506","319 out of 2087","591 out of 3989","797 out of 4957","771 out of 4889","682 out of 4394"],"type":"scatter","name":"Divorced","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[14.6853146853147,17.2645739910314,15.6010230179028,13.8436482084691,13.1212723658052,14.4329896907216,14.5336225596529],"x":[2015,2016,2017,2018,2019,2020,2021],"mode":"lines+markers","text":["63 out of 429","77 out of 446","61 out of 391","85 out of 614","66 out of 503","70 out of 485","67 out of 461"],"type":"scatter","name":"Separated","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"textfont":{"color":"rgba(93,200,99,1)"},"error_y":{"color":"rgba(93,200,99,1)"},"error_x":{"color":"rgba(93,200,99,1)"},"line":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[7.76745294257803,8.55984740104912,8.71886120996441,10.1350277998411,9.83990628660679,10.9516511077052,11.0651784483947],"x":[2015,2016,2017,2018,2019,2020,2021],"mode":"lines+markers","text":["326 out of 4197","359 out of 4194","294 out of 3372","638 out of 6295","756 out of 7683","786 out of 7177","803 out of 7257"],"type":"scatter","name":"Never married","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="age-distribution" class="section level3">
+<h3>Age distribution</h3>
+<p>As we can see from the plot, the age distribution of people taking
+medication for depression did not change much from 2015 to 2021.</p>
+<pre class="r"><code>anx_dep %&gt;%
+  drop_na(age, deprx) %&gt;% 
+  ggplot(
+    aes(x=age, group=deprx, fill=deprx)
+  ) +
+  geom_density(alpha=0.4) +
+  facet_wrap(~year) +
+  labs(
+    fill = &quot;Whether taken medicine for depression&quot;
+  )</code></pre>
+<p><img src="depression_trend_files/figure-html/unnamed-chunk-6-1.png" width="90%" /></p>
+</div>
+<div id="frequency-of-depression" class="section level3">
+<h3>Frequency of depression</h3>
+<p>From this bar plot about how often people feel depressed, we can
+observe that the frequency is quite stable with a decrease from 2018 to
+2019 and am increase from 2019 to 2021. There is no clear evidence of an
+effect of COVID-19 on the frequency of depression.</p>
+<pre class="r"><code>anx_dep %&gt;% 
+  drop_na(depfreq) %&gt;% 
+  group_by(year, depfreq) %&gt;% 
+  summarize(count = n()) %&gt;% 
+  group_by(year) %&gt;% 
+  summarize(
+     percentage=100 * count/sum(count),
+     sum_count = sum(count),
+     depfreq = depfreq,
+     count=count
+  ) %&gt;% 
+  mutate(
+    text_label = str_c(count, &quot; out of &quot;, sum_count)
+  ) %&gt;% 
+  plot_ly(
+    y = ~percentage,
+    x = ~year,
+    color = ~depfreq,
+    type = &quot;bar&quot;, 
+    colors = &quot;viridis&quot;,
+    text = ~text_label
+  ) %&gt;% 
+  layout(
+    xaxis = list (title = &quot;&quot;),
+    yaxis = list (title = &quot;Percentage&quot;), 
+    barmode = &#39;stack&#39;,
+    legend = list(orientation = &#39;h&#39;)
+  )</code></pre>
+<div id="htmlwidget-bb80b40e5ffe4585b8a2" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bb80b40e5ffe4585b8a2">{"x":{"visdat":{"c1b851305166":["function () ","plotlyVisDat"]},"cur_data":"c1b851305166","attrs":{"c1b851305166":{"y":{},"x":{},"text":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":""},"yaxis":{"domain":[0,1],"automargin":true,"title":"Percentage"},"barmode":"stack","legend":{"orientation":"h"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"y":[3.85879018231012,4.25585813806206,3.95939086294416,4.44435391885286,3.95865578845195,3.63173525668222,3.62285583156445],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["599 out of 15523","672 out of 15790","507 out of 12805","1091 out of 24548","1509 out of 38119","1284 out of 35355","1263 out of 34862"],"type":"bar","name":"Daily","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[5.39844102299813,4.96516782773908,5.43537680593518,5.84161642496334,5.22836380807471,5.6936784047518,5.8889335092651],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["838 out of 15523","784 out of 15790","696 out of 12805","1434 out of 24548","1993 out of 38119","2013 out of 35355","2053 out of 34862"],"type":"bar","name":"Weekly","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"textfont":{"color":"rgba(59,82,139,1)"},"error_y":{"color":"rgba(59,82,139,1)"},"error_x":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[6.1714874702055,5.49715009499683,6.31003514252245,6.28564445168649,6.36690364385215,6.95516900014142,7.48666169468189],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["958 out of 15523","868 out of 15790","808 out of 12805","1543 out of 24548","2427 out of 38119","2459 out of 35355","2610 out of 34862"],"type":"bar","name":"Monthly","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[22.5922824196354,23.666877770741,25.146427176884,25.4603226332084,25.3390697552402,27.1418469806251,27.9588090184155],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["3507 out of 15523","3737 out of 15790","3220 out of 12805","6250 out of 24548","9659 out of 38119","9596 out of 35355","9747 out of 34862"],"type":"bar","name":"A few times a year","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"textfont":{"color":"rgba(93,200,99,1)"},"error_y":{"color":"rgba(93,200,99,1)"},"error_x":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[61.9789989048509,61.6149461684611,59.1487700117142,57.9680625712889,59.107007004381,56.5775703577995,55.0427399460731],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["9621 out of 15523","9729 out of 15790","7574 out of 12805","14230 out of 24548","22531 out of 38119","20003 out of 35355","19189 out of 34862"],"type":"bar","name":"Never","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="level-of-depression" class="section level3">
+<h3>Level of depression</h3>
+<p>From this bar plot about the level of depression last time, we can
+see that the percentage of people who felt a lot or between a little and
+a lot depression is stable over the time period and a decrease of
+percentage of people feel a lot depression from 2018 to 2019. There is
+also no clear evidence of an effect of COVID-19 on the level of
+depression.</p>
+<pre class="r"><code>anx_dep %&gt;%
+  drop_na(depfeelevl) %&gt;% 
+  group_by(year, depfeelevl) %&gt;% 
+  summarize(count = n()) %&gt;% 
+  group_by(year) %&gt;% 
+  summarize(
+     percentage=100 * count/sum(count),
+     sum_count = sum(count),
+     depfeelevl = depfeelevl,
+     count=count
+  ) %&gt;% 
+  mutate(
+    text_label = str_c(count, &quot; out of &quot;, sum_count)
+  ) %&gt;% 
+  plot_ly(
+    y = ~percentage,
+    x = ~year,
+    color = ~depfeelevl,
+    type = &quot;bar&quot;, 
+    colors = &quot;viridis&quot;,
+    text = ~text_label
+  ) %&gt;% 
+  layout(
+    xaxis = list (title = &quot;&quot;),
+    yaxis = list (title = &quot;Percentage&quot;), 
+    barmode = &#39;stack&#39;,
+    legend = list(orientation = &#39;h&#39;)
+  )</code></pre>
+<div id="htmlwidget-466670a518f65bde7d22" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-466670a518f65bde7d22">{"x":{"visdat":{"c1b848ef4e97":["function () ","plotlyVisDat"]},"cur_data":"c1b848ef4e97","attrs":{"c1b848ef4e97":{"y":{},"x":{},"text":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":""},"yaxis":{"domain":[0,1],"automargin":true,"title":"Percentage"},"barmode":"stack","legend":{"orientation":"h"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"y":[54.1098169717138,54.6054750402577,53.1507876969242,54.1031708471368,50.4926460088533,51.3786051759396,50.7763414458005],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["3252 out of 6010","3391 out of 6210","2834 out of 5332","5716 out of 10565","7072 out of 14006","7286 out of 14181","7031 out of 13847"],"type":"bar","name":"A lot","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[31.8635607321131,31.8196457326892,33.702175543886,32.049219119735,35.8917606739969,36.5065933291023,36.4772152812884],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["1915 out of 6010","1976 out of 6210","1797 out of 5332","3386 out of 10565","5027 out of 14006","5177 out of 14181","5051 out of 13847"],"type":"bar","name":"Somewhere between a little and a lot","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[14.026622296173,13.5748792270531,13.1470367591898,13.8476100331283,13.6155933171498,12.114801494958,12.7464432729111],"x":[2015,2016,2017,2018,2019,2020,2021],"text":["843 out of 6010","843 out of 6210","701 out of 5332","1463 out of 10565","1907 out of 14006","1718 out of 14181","1765 out of 13847"],"type":"bar","name":"A little","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Suicide Analysis</title>
+
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Suicide Analysis</h1>
+
+</div>
+
+
+<div id="suicide-analysis" class="section level2">
+<h2>Suicide Analysis</h2>
+<div id="import-and-tidy-dataset" class="section level3">
+<h3>Import and tidy dataset</h3>
+<pre class="r"><code>suicide_df = 
+  read_excel(
+    &quot;./data/suicide_data.xlsx&quot;,
+    sheet = 1,
+    col_names = TRUE) %&gt;% 
+  janitor::clean_names() %&gt;% 
+  mutate(
+    population = (suicide_no / suicide_100k) * 100000, 
+    sex = as.factor(sex),
+    age = as.factor(age)
+  )
+
+average_20years = sum(suicide_df$suicide_no) / sum(suicide_df$population) * 100000
+
+suicide_state_df = 
+  read_excel(
+    &quot;./data/suicide_data.xlsx&quot;,
+    sheet = 2,
+    range = &quot;A1:D351&quot;,
+    skip = 1,
+    col_names = TRUE) %&gt;% 
+  janitor::clean_names() %&gt;% 
+  rename(
+     suicide_no = deaths,
+     suicide_100k = death_rate) %&gt;% 
+  mutate(
+    population = (suicide_no / suicide_100k) * 100000
+  )
+  
+suicide_means_df =
+   read_excel(
+    &quot;./data/suicide_data.xlsx&quot;,
+    sheet = 3,
+    col_names = TRUE) %&gt;% 
+  janitor::clean_names() %&gt;% 
+  pivot_longer(
+    firearm:others,
+    names_to = &quot;means&quot;,
+    values_to = &quot;rate&quot;
+  ) %&gt;% 
+  mutate(
+       sex = as.factor(sex),
+       means = as.factor(means)) </code></pre>
+</div>
+<div id="national-trend-of-suicide-rate-2000-2020-per-100k-per-year"
+class="section level3">
+<h3>National trend of suicide rate, 2000-2020, (per 100K, per year)</h3>
+<pre class="r"><code>suicide_plot = suicide_df %&gt;% 
+  group_by(year) %&gt;% 
+  summarize(
+    population = sum(population),
+    suicide = sum(suicide_no),
+    suicide_100k = (suicide / population) * 100000
+  ) %&gt;%
+  ggplot(aes(x = year, y = suicide_100k)) +
+  geom_line(col = &quot;deepskyblue&quot;, size = 1) +
+  geom_point(col = &quot;deepskyblue&quot;, size = 2) +
+  geom_hline(
+    yintercept = average_20years, linetype = 2, color = &quot;red&quot;, size = 1) +
+  scale_x_continuous(breaks = seq(2000, 2020, 5)) + 
+  scale_y_continuous(breaks = seq(8, 18, 1)) +
+  labs(title = &quot;US National Suicide Rate (per 100K), 2020-2022&quot;,
+       x = &quot;Year&quot;, 
+       y = &quot;Suicides per 100k&quot;) 
+
+ggplotly(suicide_plot)</code></pre>
+<div id="htmlwidget-c953333f588b32b37006" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c953333f588b32b37006">{"x":{"data":[{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[10.873252611518,12.424337471241,12.6936388621869,12.4934847528116,12.7592573837404,12.8059300570178,12.8136691474914,13.210889085059,13.6776216129238,13.8602224062826,14.3363421294991,14.5553619082234,14.8229654797747,14.9014216219621,15.3697832686267,15.7557739282361,15.9254281083399,16.5463938429512,16.8287639255165,16.4452722965689,15.8438322398499],"text":["year: 2000<br />suicide_100k: 10.87325","year: 2001<br />suicide_100k: 12.42434","year: 2002<br />suicide_100k: 12.69364","year: 2003<br />suicide_100k: 12.49348","year: 2004<br />suicide_100k: 12.75926","year: 2005<br />suicide_100k: 12.80593","year: 2006<br />suicide_100k: 12.81367","year: 2007<br />suicide_100k: 13.21089","year: 2008<br />suicide_100k: 13.67762","year: 2009<br />suicide_100k: 13.86022","year: 2010<br />suicide_100k: 14.33634","year: 2011<br />suicide_100k: 14.55536","year: 2012<br />suicide_100k: 14.82297","year: 2013<br />suicide_100k: 14.90142","year: 2014<br />suicide_100k: 15.36978","year: 2015<br />suicide_100k: 15.75577","year: 2016<br />suicide_100k: 15.92543","year: 2017<br />suicide_100k: 16.54639","year: 2018<br />suicide_100k: 16.82876","year: 2019<br />suicide_100k: 16.44527","year: 2020<br />suicide_100k: 15.84383"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(0,191,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,191,255,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,255,1)"}},"frame":null},{"x":[1999,2021],"y":[14.287632879145,14.287632879145],"text":"yintercept: 14.28763","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(255,0,0,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":44.4931506849315,"r":7.30593607305936,"b":40.9132420091324,"l":37.2602739726027},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"US National Suicide Rate (per 100K), 2020-2022","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1999,2021],"tickmode":"array","ticktext":["2000","2005","2010","2015","2020"],"tickvals":[2000,2005,2010,2015,2020],"categoryorder":"array","categoryarray":["2000","2005","2010","2015","2020"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[10.575477045818,17.1265394912164],"tickmode":"array","ticktext":["11","12","13","14","15","16","17"],"tickvals":[11,12,13,14,15,16,17],"categoryorder":"array","categoryarray":["11","12","13","14","15","16","17"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Suicides per 100k","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"dc5c10ef7b00":{"x":{},"y":{},"type":"scatter"},"dc5c36e6730":{"x":{},"y":{}},"dc5c6a5f5c25":{"yintercept":{}}},"cur_data":"dc5c10ef7b00","visdat":{"dc5c10ef7b00":["function (y) ","x"],"dc5c36e6730":["function (y) ","x"],"dc5c6a5f5c25":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Comment: The US national suicide rates increased from 2000 to 2018,
+then declined from 2018 to 2020. The average suicide rate from 2000 to
+2020 was 14.2 per 100,000 (represented with red dot line).</p>
+</div>
+<div id="cumulative-suicide-rate-for-each-state-2014-2020"
+class="section level3">
+<h3>Cumulative suicide rate for each state, 2014-2020</h3>
+<pre class="r"><code>suicide_state_df %&gt;% 
+  group_by(state) %&gt;% 
+  summarize(
+    population = sum(population),
+    suicide = sum(suicide_no),
+    suicide_100k = (suicide / population) * 100000
+  ) %&gt;%
+  mutate(
+    state = fct_reorder(state, suicide_100k)) %&gt;% 
+  ggplot(aes(x = suicide_100k, y = state, fill = state )) +
+  geom_bar(stat = &quot;identity&quot;) +
+  scale_x_continuous(breaks = seq(0, 30, 2)) +
+  labs(
+    title = &quot;Cumulative Suicide Rate, by State, 2014-2020&quot;, 
+    x = &quot;Suicides per 100k&quot;, 
+    y = &quot;State&quot;) +
+  theme(legend.position = &quot;right&quot;)</code></pre>
+<p><img src="suicide_analysis_files/figure-html/unnamed-chunk-3-1.png" width="90%" /></p>
+<p>Comment: Wyoming had the highest suicide rate and New Jersey had the
+lowest suicide rate from 2014-2020. The top 5 states with high
+cumulative suicide rates were Wyoming, Alaska, Montana, New Mexico, and
+Idaho; the top 5 states with low cumulative suicide rates were New
+Jersey, New York, Massachusetts, Maryland and Connecticut.</p>
+</div>
+<div id="suicide-rate-for-each-state-over-years-2014-2020"
+class="section level3">
+<h3>Suicide rate for each state over years, 2014-2020</h3>
+<pre class="r"><code>suicide_state_df %&gt;% 
+  ggplot(aes(x = suicide_100k, y = state, color = year)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = &quot;Suicide Rate for Each State Over Years, 2014-2020&quot;,
+    x = &quot;State&quot;,
+    y = &quot;Suicides per 100K&quot;) +
+  theme(legend.position = &quot;right&quot;)</code></pre>
+<p><img src="suicide_analysis_files/figure-html/unnamed-chunk-4-1.png" width="90%" /></p>
+<p>Comment:</p>
+<p>Between 2014 and 2020, the state with the largest change in suicide
+rate was Wyoming, from 20.6 to 30.5; the state with the smallest change
+in suicide rate was New York, from 7.8 to 8.3.</p>
+</div>
+<div id="suicide-rate-by-sex" class="section level3">
+<h3>Suicide rate by sex</h3>
+<pre class="r"><code>total_sex_plot = suicide_df %&gt;% 
+  group_by(sex) %&gt;% 
+  summarize(
+    population = sum(population),
+    suicide = sum(suicide_no),
+    suicide_100k = (suicide / population) * 100000
+  ) %&gt;% 
+  ggplot(aes(x = sex, y = suicide_100k, fill = sex )) +
+  geom_bar(stat = &quot;identity&quot;) +
+  scale_y_continuous(breaks = seq(0, 24, 4)) +
+  labs(
+    title = &quot;National Suicide Rate, by Sex&quot;, 
+    x = &quot;Sex&quot;, 
+    y = &quot;Suicides per 100k&quot;)
+
+
+year_sex_plot = suicide_df %&gt;% 
+  group_by(year, sex) %&gt;% 
+  summarize(
+    population = sum(population),
+    suicide = sum(suicide_no),
+    suicide_100k = (suicide / population) * 100000
+  ) %&gt;% 
+  ggplot(aes(x = year, y = suicide_100k, color = sex)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(breaks = seq(0, 30, 5)) +
+  labs(
+    title = &quot;Suicide Trend Over Years, by Sex&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Suicides per 100k&quot;
+  )
+
+grid.arrange(total_sex_plot, year_sex_plot, ncol = 2 )</code></pre>
+<p><img src="suicide_analysis_files/figure-html/unnamed-chunk-5-1.png" width="90%" /></p>
+<p>Comment: Nationally, the overall suicide rate for males is about 4
+times that of females. For females, suicide rates peaked in 2018 and
+declined since then; for males, suicide rates peaked in 2017 and
+declined since then. From year 2000 to 2020, the male suicide rate
+remained apparently higher than the female suicide rate, and the ratio
+was constantly about 4:1.</p>
+</div>
+<div id="suicide-rate-by-age" class="section level3">
+<h3>Suicide rate by age</h3>
+<pre class="r"><code>total_age_plot = suicide_df %&gt;% 
+  group_by(age) %&gt;% 
+  summarize(
+    population = sum(population),
+    suicide = sum(suicide_no),
+    suicide_100k = (suicide / population) * 100000
+  ) %&gt;% 
+  ggplot(aes(x = age, y = suicide_100k, fill = age )) +
+  geom_bar(stat = &quot;identity&quot;) +
+  scale_y_continuous(breaks = seq(0, 20, 2)) +
+  labs(
+    title = &quot;National Suicide Rate, by Age&quot;, 
+    x = &quot;Age&quot;, 
+    y = &quot;Suicides per 100k&quot;)
+
+
+year_age_plot = suicide_df %&gt;% 
+  group_by(year, age) %&gt;% 
+  summarize(
+    population = sum(population),
+    suicide = sum(suicide_no),
+    suicide_100k = (suicide / population) * 100000
+  ) %&gt;% 
+  ggplot(aes(x = year, y = suicide_100k,  color = age)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(breaks = seq(0, 24, 2)) +
+  labs(
+    title = &quot;Suicide Trend Over Years, by Age&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Suicides per 100k&quot;
+  )
+
+grid.arrange(total_age_plot, year_age_plot, ncol = 2 )</code></pre>
+<p><img src="suicide_analysis_files/figure-html/unnamed-chunk-6-1.png" width="90%" /></p>
+<p>Comment: Nationally, aged 45-64 had the highest suicide rate, second
+highest group was aged 75+. The 10-14 aged group had the lowest suicide
+rate. From year 2000 to 2020, the suicide rate of group aged 10-14
+remained roughly static and small. Suicide rates in all other age groups
+showed an overall upward trend. Among them, the group aged 25-44 had the
+largest change, roughly from 10 to 18 suicide rate per 100k. The suicide
+rates of those aged 45-64 and aged 65-74 started to drop since 2018.</p>
+</div>
+<div id="suicide-rate-for-females-by-age-group-2000-2020"
+class="section level3">
+<h3>Suicide rate for females, by age group, 2000-2020</h3>
+<pre class="r"><code>female_plot = suicide_df %&gt;% 
+  filter(sex == &quot;female&quot;) %&gt;% 
+  group_by(year, age) %&gt;% 
+  summarize(
+    population = sum(population),
+    suicide = sum(suicide_no),
+    suicide_100k = (suicide / population) * 100000
+  ) %&gt;% 
+  ggplot(aes(x = year, y = suicide_100k,  color = age)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(breaks = seq(0, 12, 2)) +
+  labs(
+    title = &quot;Suicide Trend  for Females by Age, 2000-2020&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Suicides per 100k&quot;
+  )
+
+ggplotly(female_plot)</code></pre>
+<div id="htmlwidget-3d311a9a00da6e8698e9" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3d311a9a00da6e8698e9">{"x":{"data":[{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[0.6,0.6,0.6,0.5,0.9,0.7,0.6,0.5,0.7,0.9,0.9,0.8,0.8,1.4,1.5,1.6,1.7,1.7,2,2,2],"text":["year: 2000<br />suicide_100k:  0.6<br />age: 10-14","year: 2001<br />suicide_100k:  0.6<br />age: 10-14","year: 2002<br />suicide_100k:  0.6<br />age: 10-14","year: 2003<br />suicide_100k:  0.5<br />age: 10-14","year: 2004<br />suicide_100k:  0.9<br />age: 10-14","year: 2005<br />suicide_100k:  0.7<br />age: 10-14","year: 2006<br />suicide_100k:  0.6<br />age: 10-14","year: 2007<br />suicide_100k:  0.5<br />age: 10-14","year: 2008<br />suicide_100k:  0.7<br />age: 10-14","year: 2009<br />suicide_100k:  0.9<br />age: 10-14","year: 2010<br />suicide_100k:  0.9<br />age: 10-14","year: 2011<br />suicide_100k:  0.8<br />age: 10-14","year: 2012<br />suicide_100k:  0.8<br />age: 10-14","year: 2013<br />suicide_100k:  1.4<br />age: 10-14","year: 2014<br />suicide_100k:  1.5<br />age: 10-14","year: 2015<br />suicide_100k:  1.6<br />age: 10-14","year: 2016<br />suicide_100k:  1.7<br />age: 10-14","year: 2017<br />suicide_100k:  1.7<br />age: 10-14","year: 2018<br />suicide_100k:  2.0<br />age: 10-14","year: 2019<br />suicide_100k:  2.0<br />age: 10-14","year: 2020<br />suicide_100k:  2.0<br />age: 10-14"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(68,1,84,1)","dash":"solid"},"hoveron":"points","name":"10-14","legendgroup":"10-14","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(68,1,84,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[3,2.9,2.9,3,3.5,3.5,3.2,3.1,3.5,3.6,3.9,4,4.5,4.5,4.6,5.3,5.4,5.8,5.8,5.5,5.8],"text":["year: 2000<br />suicide_100k:  3.0<br />age: 15-24","year: 2001<br />suicide_100k:  2.9<br />age: 15-24","year: 2002<br />suicide_100k:  2.9<br />age: 15-24","year: 2003<br />suicide_100k:  3.0<br />age: 15-24","year: 2004<br />suicide_100k:  3.5<br />age: 15-24","year: 2005<br />suicide_100k:  3.5<br />age: 15-24","year: 2006<br />suicide_100k:  3.2<br />age: 15-24","year: 2007<br />suicide_100k:  3.1<br />age: 15-24","year: 2008<br />suicide_100k:  3.5<br />age: 15-24","year: 2009<br />suicide_100k:  3.6<br />age: 15-24","year: 2010<br />suicide_100k:  3.9<br />age: 15-24","year: 2011<br />suicide_100k:  4.0<br />age: 15-24","year: 2012<br />suicide_100k:  4.5<br />age: 15-24","year: 2013<br />suicide_100k:  4.5<br />age: 15-24","year: 2014<br />suicide_100k:  4.6<br />age: 15-24","year: 2015<br />suicide_100k:  5.3<br />age: 15-24","year: 2016<br />suicide_100k:  5.4<br />age: 15-24","year: 2017<br />suicide_100k:  5.8<br />age: 15-24","year: 2018<br />suicide_100k:  5.8<br />age: 15-24","year: 2019<br />suicide_100k:  5.5<br />age: 15-24","year: 2020<br />suicide_100k:  5.8<br />age: 15-24"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(65,68,135,1)","dash":"solid"},"hoveron":"points","name":"15-24","legendgroup":"15-24","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(65,68,135,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(65,68,135,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[5.4,5.5,5.9,5.7,6,5.8,5.9,6.2,6.3,6.2,6.4,6.8,6.8,6.8,7.2,7.5,7.6,7.8,7.9,7.4,7.2],"text":["year: 2000<br />suicide_100k:  5.4<br />age: 25-44","year: 2001<br />suicide_100k:  5.5<br />age: 25-44","year: 2002<br />suicide_100k:  5.9<br />age: 25-44","year: 2003<br />suicide_100k:  5.7<br />age: 25-44","year: 2004<br />suicide_100k:  6.0<br />age: 25-44","year: 2005<br />suicide_100k:  5.8<br />age: 25-44","year: 2006<br />suicide_100k:  5.9<br />age: 25-44","year: 2007<br />suicide_100k:  6.2<br />age: 25-44","year: 2008<br />suicide_100k:  6.3<br />age: 25-44","year: 2009<br />suicide_100k:  6.2<br />age: 25-44","year: 2010<br />suicide_100k:  6.4<br />age: 25-44","year: 2011<br />suicide_100k:  6.8<br />age: 25-44","year: 2012<br />suicide_100k:  6.8<br />age: 25-44","year: 2013<br />suicide_100k:  6.8<br />age: 25-44","year: 2014<br />suicide_100k:  7.2<br />age: 25-44","year: 2015<br />suicide_100k:  7.5<br />age: 25-44","year: 2016<br />suicide_100k:  7.6<br />age: 25-44","year: 2017<br />suicide_100k:  7.8<br />age: 25-44","year: 2018<br />suicide_100k:  7.9<br />age: 25-44","year: 2019<br />suicide_100k:  7.4<br />age: 25-44","year: 2020<br />suicide_100k:  7.2<br />age: 25-44"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(42,120,142,1)","dash":"solid"},"hoveron":"points","name":"25-44","legendgroup":"25-44","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(42,120,142,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(42,120,142,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[6.2,6.6,6.7,6.9,7.6,7.2,7.7,8.1,8.1,8.5,8.6,8.8,9.1,9.4,9.8,10.2,9.9,9.7,9.8,9.6,7.9],"text":["year: 2000<br />suicide_100k:  6.2<br />age: 45-64","year: 2001<br />suicide_100k:  6.6<br />age: 45-64","year: 2002<br />suicide_100k:  6.7<br />age: 45-64","year: 2003<br />suicide_100k:  6.9<br />age: 45-64","year: 2004<br />suicide_100k:  7.6<br />age: 45-64","year: 2005<br />suicide_100k:  7.2<br />age: 45-64","year: 2006<br />suicide_100k:  7.7<br />age: 45-64","year: 2007<br />suicide_100k:  8.1<br />age: 45-64","year: 2008<br />suicide_100k:  8.1<br />age: 45-64","year: 2009<br />suicide_100k:  8.5<br />age: 45-64","year: 2010<br />suicide_100k:  8.6<br />age: 45-64","year: 2011<br />suicide_100k:  8.8<br />age: 45-64","year: 2012<br />suicide_100k:  9.1<br />age: 45-64","year: 2013<br />suicide_100k:  9.4<br />age: 45-64","year: 2014<br />suicide_100k:  9.8<br />age: 45-64","year: 2015<br />suicide_100k: 10.2<br />age: 45-64","year: 2016<br />suicide_100k:  9.9<br />age: 45-64","year: 2017<br />suicide_100k:  9.7<br />age: 45-64","year: 2018<br />suicide_100k:  9.8<br />age: 45-64","year: 2019<br />suicide_100k:  9.6<br />age: 45-64","year: 2020<br />suicide_100k:  7.9<br />age: 45-64"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(34,168,132,1)","dash":"solid"},"hoveron":"points","name":"45-64","legendgroup":"45-64","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(34,168,132,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(34,168,132,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[4,3.9,4.1,3.8,3.7,4,4,4.2,4.4,4.6,4.8,5.2,5.2,5.4,5.9,5.7,6.2,6.2,6.2,5.9,5.6],"text":["year: 2000<br />suicide_100k:  4.0<br />age: 65-74","year: 2001<br />suicide_100k:  3.9<br />age: 65-74","year: 2002<br />suicide_100k:  4.1<br />age: 65-74","year: 2003<br />suicide_100k:  3.8<br />age: 65-74","year: 2004<br />suicide_100k:  3.7<br />age: 65-74","year: 2005<br />suicide_100k:  4.0<br />age: 65-74","year: 2006<br />suicide_100k:  4.0<br />age: 65-74","year: 2007<br />suicide_100k:  4.2<br />age: 65-74","year: 2008<br />suicide_100k:  4.4<br />age: 65-74","year: 2009<br />suicide_100k:  4.6<br />age: 65-74","year: 2010<br />suicide_100k:  4.8<br />age: 65-74","year: 2011<br />suicide_100k:  5.2<br />age: 65-74","year: 2012<br />suicide_100k:  5.2<br />age: 65-74","year: 2013<br />suicide_100k:  5.4<br />age: 65-74","year: 2014<br />suicide_100k:  5.9<br />age: 65-74","year: 2015<br />suicide_100k:  5.7<br />age: 65-74","year: 2016<br />suicide_100k:  6.2<br />age: 65-74","year: 2017<br />suicide_100k:  6.2<br />age: 65-74","year: 2018<br />suicide_100k:  6.2<br />age: 65-74","year: 2019<br />suicide_100k:  5.9<br />age: 65-74","year: 2020<br />suicide_100k:  5.6<br />age: 65-74"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(122,209,81,1)","dash":"solid"},"hoveron":"points","name":"65-74","legendgroup":"65-74","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(122,209,81,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(122,209,81,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[4,3.9,4.1,3.8,3.9,4.1,3.8,3.7,3.8,3.5,3.6,3.7,3.7,3.7,4,4.5,4.2,4,4,4.3,3.9],"text":["year: 2000<br />suicide_100k:  4.0<br />age: 75+","year: 2001<br />suicide_100k:  3.9<br />age: 75+","year: 2002<br />suicide_100k:  4.1<br />age: 75+","year: 2003<br />suicide_100k:  3.8<br />age: 75+","year: 2004<br />suicide_100k:  3.9<br />age: 75+","year: 2005<br />suicide_100k:  4.1<br />age: 75+","year: 2006<br />suicide_100k:  3.8<br />age: 75+","year: 2007<br />suicide_100k:  3.7<br />age: 75+","year: 2008<br />suicide_100k:  3.8<br />age: 75+","year: 2009<br />suicide_100k:  3.5<br />age: 75+","year: 2010<br />suicide_100k:  3.6<br />age: 75+","year: 2011<br />suicide_100k:  3.7<br />age: 75+","year: 2012<br />suicide_100k:  3.7<br />age: 75+","year: 2013<br />suicide_100k:  3.7<br />age: 75+","year: 2014<br />suicide_100k:  4.0<br />age: 75+","year: 2015<br />suicide_100k:  4.5<br />age: 75+","year: 2016<br />suicide_100k:  4.2<br />age: 75+","year: 2017<br />suicide_100k:  4.0<br />age: 75+","year: 2018<br />suicide_100k:  4.0<br />age: 75+","year: 2019<br />suicide_100k:  4.3<br />age: 75+","year: 2020<br />suicide_100k:  3.9<br />age: 75+"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(253,231,37,1)","dash":"solid"},"hoveron":"points","name":"75+","legendgroup":"75+","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(253,231,37,1)"}},"frame":null}],"layout":{"margin":{"t":44.4931506849315,"r":7.30593607305936,"b":40.9132420091324,"l":37.2602739726027},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Suicide Trend  for Females by Age, 2000-2020","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1999,2021],"tickmode":"array","ticktext":["2000","2005","2010","2015","2020"],"tickvals":[2000,2005,2010,2015,2020],"categoryorder":"array","categoryarray":["2000","2005","2010","2015","2020"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.015,10.685],"tickmode":"array","ticktext":["2","4","6","8","10"],"tickvals":[2,4,6,8,10],"categoryorder":"array","categoryarray":["2","4","6","8","10"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Suicides per 100k","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"age","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"dc5c291a7c4e":{"x":{},"y":{},"colour":{},"type":"scatter"},"dc5c1cee17f0":{"x":{},"y":{},"colour":{}}},"cur_data":"dc5c291a7c4e","visdat":{"dc5c291a7c4e":["function (y) ","x"],"dc5c1cee17f0":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>Comment:</strong></p>
+<ul>
+<li>Recently (from 2018 to 2020), suicide rates decreased in females
+aged 25-44, 45-64, 65-74 and 75+, but increased for those aged 15-24 and
+kept constant for those aged 10-14.</li>
+<li>Suicide rates were highest for those females aged 45-64 over the
+period of 2000-2020. The suicide rate increased from 6.2 in 2000 to the
+highest 10.2 in 2015, and then declined to 7.9 in 2020.</li>
+<li>Suicide rates were consistently lowest for those females aged 10-14
+over the period of 2000-2020. The suicide rate increased from 0.6 in
+2000 to the highest 2.0 in 2018, and then kept constant through 2020.But
+the rate more than tripled from 0.6 (2000) to 2.0 (2020).</li>
+<li>The suicide rates of those aged 75+ were relatively stable between
+2000 and 2020.</li>
+</ul>
+</div>
+<div id="suicide-rate-for-males-by-age-group-2000-2020"
+class="section level3">
+<h3>Suicide rate for males, by age group, 2000-2020</h3>
+<pre class="r"><code>male_plot =  suicide_df %&gt;% 
+  filter(sex == &quot;male&quot;) %&gt;% 
+  group_by(year, age) %&gt;% 
+  summarize(
+    population = sum(population),
+    suicide = sum(suicide_no),
+    suicide_100k = (suicide / population) * 100000
+  ) %&gt;% 
+  ggplot(aes(x = year, y = suicide_100k,  color = age)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(breaks = seq(0, 45, 5)) +
+  labs(
+    title = &quot;Suicide Trend  for Males by Age, 2000-2020&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Suicides per 100k&quot;
+  )
+
+ggplotly(male_plot)</code></pre>
+<div id="htmlwidget-33b780df9e0eae81fdc8" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-33b780df9e0eae81fdc8">{"x":{"data":[{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[2.3,1.9,1.8,1.7,1.7,1.9,1.4,1.2,1.4,1.6,1.7,1.9,2.1,2.3,2.6,2.4,2.5,3.3,3.7,3.1,3.6],"text":["year: 2000<br />suicide_100k:  2.3<br />age: 10-14","year: 2001<br />suicide_100k:  1.9<br />age: 10-14","year: 2002<br />suicide_100k:  1.8<br />age: 10-14","year: 2003<br />suicide_100k:  1.7<br />age: 10-14","year: 2004<br />suicide_100k:  1.7<br />age: 10-14","year: 2005<br />suicide_100k:  1.9<br />age: 10-14","year: 2006<br />suicide_100k:  1.4<br />age: 10-14","year: 2007<br />suicide_100k:  1.2<br />age: 10-14","year: 2008<br />suicide_100k:  1.4<br />age: 10-14","year: 2009<br />suicide_100k:  1.6<br />age: 10-14","year: 2010<br />suicide_100k:  1.7<br />age: 10-14","year: 2011<br />suicide_100k:  1.9<br />age: 10-14","year: 2012<br />suicide_100k:  2.1<br />age: 10-14","year: 2013<br />suicide_100k:  2.3<br />age: 10-14","year: 2014<br />suicide_100k:  2.6<br />age: 10-14","year: 2015<br />suicide_100k:  2.4<br />age: 10-14","year: 2016<br />suicide_100k:  2.5<br />age: 10-14","year: 2017<br />suicide_100k:  3.3<br />age: 10-14","year: 2018<br />suicide_100k:  3.7<br />age: 10-14","year: 2019<br />suicide_100k:  3.1<br />age: 10-14","year: 2020<br />suicide_100k:  3.6<br />age: 10-14"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(68,1,84,1)","dash":"solid"},"hoveron":"points","name":"10-14","legendgroup":"10-14","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(68,1,84,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[17.1,16.5,16.4,15.9,16.7,16.1,16,15.7,16,16.1,16.9,17.6,17.4,17.3,18.2,19.4,20.5,22.7,22.7,22,22.4],"text":["year: 2000<br />suicide_100k: 17.1<br />age: 15-24","year: 2001<br />suicide_100k: 16.5<br />age: 15-24","year: 2002<br />suicide_100k: 16.4<br />age: 15-24","year: 2003<br />suicide_100k: 15.9<br />age: 15-24","year: 2004<br />suicide_100k: 16.7<br />age: 15-24","year: 2005<br />suicide_100k: 16.1<br />age: 15-24","year: 2006<br />suicide_100k: 16.0<br />age: 15-24","year: 2007<br />suicide_100k: 15.7<br />age: 15-24","year: 2008<br />suicide_100k: 16.0<br />age: 15-24","year: 2009<br />suicide_100k: 16.1<br />age: 15-24","year: 2010<br />suicide_100k: 16.9<br />age: 15-24","year: 2011<br />suicide_100k: 17.6<br />age: 15-24","year: 2012<br />suicide_100k: 17.4<br />age: 15-24","year: 2013<br />suicide_100k: 17.3<br />age: 15-24","year: 2014<br />suicide_100k: 18.2<br />age: 15-24","year: 2015<br />suicide_100k: 19.4<br />age: 15-24","year: 2016<br />suicide_100k: 20.5<br />age: 15-24","year: 2017<br />suicide_100k: 22.7<br />age: 15-24","year: 2018<br />suicide_100k: 22.7<br />age: 15-24","year: 2019<br />suicide_100k: 22.0<br />age: 15-24","year: 2020<br />suicide_100k: 22.4<br />age: 15-24"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(65,68,135,1)","dash":"solid"},"hoveron":"points","name":"15-24","legendgroup":"15-24","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(65,68,135,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(65,68,135,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[21.3,22.2,22.5,22.3,22.2,22.1,22.1,22.9,22.8,23,23.6,24,24.5,24.1,24.4,25.2,26.2,27.5,27.7,28,28.3],"text":["year: 2000<br />suicide_100k: 21.3<br />age: 25-44","year: 2001<br />suicide_100k: 22.2<br />age: 25-44","year: 2002<br />suicide_100k: 22.5<br />age: 25-44","year: 2003<br />suicide_100k: 22.3<br />age: 25-44","year: 2004<br />suicide_100k: 22.2<br />age: 25-44","year: 2005<br />suicide_100k: 22.1<br />age: 25-44","year: 2006<br />suicide_100k: 22.1<br />age: 25-44","year: 2007<br />suicide_100k: 22.9<br />age: 25-44","year: 2008<br />suicide_100k: 22.8<br />age: 25-44","year: 2009<br />suicide_100k: 23.0<br />age: 25-44","year: 2010<br />suicide_100k: 23.6<br />age: 25-44","year: 2011<br />suicide_100k: 24.0<br />age: 25-44","year: 2012<br />suicide_100k: 24.5<br />age: 25-44","year: 2013<br />suicide_100k: 24.1<br />age: 25-44","year: 2014<br />suicide_100k: 24.4<br />age: 25-44","year: 2015<br />suicide_100k: 25.2<br />age: 25-44","year: 2016<br />suicide_100k: 26.2<br />age: 25-44","year: 2017<br />suicide_100k: 27.5<br />age: 25-44","year: 2018<br />suicide_100k: 27.7<br />age: 25-44","year: 2019<br />suicide_100k: 28.0<br />age: 25-44","year: 2020<br />suicide_100k: 28.3<br />age: 25-44"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(42,120,142,1)","dash":"solid"},"hoveron":"points","name":"25-44","legendgroup":"25-44","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(42,120,142,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(42,120,142,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[21.3,22.5,23.5,23.5,23.6,23.9,24.6,25.7,27.4,27.9,29.2,28.9,29.5,29,29.7,29.5,29.1,30.1,31,29.9,27.3],"text":["year: 2000<br />suicide_100k: 21.3<br />age: 45-64","year: 2001<br />suicide_100k: 22.5<br />age: 45-64","year: 2002<br />suicide_100k: 23.5<br />age: 45-64","year: 2003<br />suicide_100k: 23.5<br />age: 45-64","year: 2004<br />suicide_100k: 23.6<br />age: 45-64","year: 2005<br />suicide_100k: 23.9<br />age: 45-64","year: 2006<br />suicide_100k: 24.6<br />age: 45-64","year: 2007<br />suicide_100k: 25.7<br />age: 45-64","year: 2008<br />suicide_100k: 27.4<br />age: 45-64","year: 2009<br />suicide_100k: 27.9<br />age: 45-64","year: 2010<br />suicide_100k: 29.2<br />age: 45-64","year: 2011<br />suicide_100k: 28.9<br />age: 45-64","year: 2012<br />suicide_100k: 29.5<br />age: 45-64","year: 2013<br />suicide_100k: 29.0<br />age: 45-64","year: 2014<br />suicide_100k: 29.7<br />age: 45-64","year: 2015<br />suicide_100k: 29.5<br />age: 45-64","year: 2016<br />suicide_100k: 29.1<br />age: 45-64","year: 2017<br />suicide_100k: 30.1<br />age: 45-64","year: 2018<br />suicide_100k: 31.0<br />age: 45-64","year: 2019<br />suicide_100k: 29.9<br />age: 45-64","year: 2020<br />suicide_100k: 27.3<br />age: 45-64"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(34,168,132,1)","dash":"solid"},"hoveron":"points","name":"45-64","legendgroup":"45-64","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(34,168,132,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(34,168,132,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[22.7,24.5,24.5,23.1,22.2,22.3,22.2,22,24.3,24.3,23.9,24.4,24.1,26,26.6,26.2,25.9,26.2,27.8,26.4,24.7],"text":["year: 2000<br />suicide_100k: 22.7<br />age: 65-74","year: 2001<br />suicide_100k: 24.5<br />age: 65-74","year: 2002<br />suicide_100k: 24.5<br />age: 65-74","year: 2003<br />suicide_100k: 23.1<br />age: 65-74","year: 2004<br />suicide_100k: 22.2<br />age: 65-74","year: 2005<br />suicide_100k: 22.3<br />age: 65-74","year: 2006<br />suicide_100k: 22.2<br />age: 65-74","year: 2007<br />suicide_100k: 22.0<br />age: 65-74","year: 2008<br />suicide_100k: 24.3<br />age: 65-74","year: 2009<br />suicide_100k: 24.3<br />age: 65-74","year: 2010<br />suicide_100k: 23.9<br />age: 65-74","year: 2011<br />suicide_100k: 24.4<br />age: 65-74","year: 2012<br />suicide_100k: 24.1<br />age: 65-74","year: 2013<br />suicide_100k: 26.0<br />age: 65-74","year: 2014<br />suicide_100k: 26.6<br />age: 65-74","year: 2015<br />suicide_100k: 26.2<br />age: 65-74","year: 2016<br />suicide_100k: 25.9<br />age: 65-74","year: 2017<br />suicide_100k: 26.2<br />age: 65-74","year: 2018<br />suicide_100k: 27.8<br />age: 65-74","year: 2019<br />suicide_100k: 26.4<br />age: 65-74","year: 2020<br />suicide_100k: 24.7<br />age: 65-74"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(122,209,81,1)","dash":"solid"},"hoveron":"points","name":"65-74","legendgroup":"65-74","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(122,209,81,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(122,209,81,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[42.4,40.7,41.3,38.8,37.6,38.6,36.2,36.7,35.7,35.6,36,36.4,37.5,38.3,38.9,38.7,39.2,39.7,39.9,39.9,40.5],"text":["year: 2000<br />suicide_100k: 42.4<br />age: 75+","year: 2001<br />suicide_100k: 40.7<br />age: 75+","year: 2002<br />suicide_100k: 41.3<br />age: 75+","year: 2003<br />suicide_100k: 38.8<br />age: 75+","year: 2004<br />suicide_100k: 37.6<br />age: 75+","year: 2005<br />suicide_100k: 38.6<br />age: 75+","year: 2006<br />suicide_100k: 36.2<br />age: 75+","year: 2007<br />suicide_100k: 36.7<br />age: 75+","year: 2008<br />suicide_100k: 35.7<br />age: 75+","year: 2009<br />suicide_100k: 35.6<br />age: 75+","year: 2010<br />suicide_100k: 36.0<br />age: 75+","year: 2011<br />suicide_100k: 36.4<br />age: 75+","year: 2012<br />suicide_100k: 37.5<br />age: 75+","year: 2013<br />suicide_100k: 38.3<br />age: 75+","year: 2014<br />suicide_100k: 38.9<br />age: 75+","year: 2015<br />suicide_100k: 38.7<br />age: 75+","year: 2016<br />suicide_100k: 39.2<br />age: 75+","year: 2017<br />suicide_100k: 39.7<br />age: 75+","year: 2018<br />suicide_100k: 39.9<br />age: 75+","year: 2019<br />suicide_100k: 39.9<br />age: 75+","year: 2020<br />suicide_100k: 40.5<br />age: 75+"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(253,231,37,1)","dash":"solid"},"hoveron":"points","name":"75+","legendgroup":"75+","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(253,231,37,1)"}},"frame":null}],"layout":{"margin":{"t":44.4931506849315,"r":7.30593607305936,"b":40.9132420091324,"l":37.2602739726027},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Suicide Trend  for Males by Age, 2000-2020","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1999,2021],"tickmode":"array","ticktext":["2000","2005","2010","2015","2020"],"tickvals":[2000,2005,2010,2015,2020],"categoryorder":"array","categoryarray":["2000","2005","2010","2015","2020"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.86,44.46],"tickmode":"array","ticktext":["0","5","10","15","20","25","30","35","40"],"tickvals":[1.11022302462516e-16,5,10,15,20,25,30,35,40],"categoryorder":"array","categoryarray":["0","5","10","15","20","25","30","35","40"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Suicides per 100k","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"age","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"dc5c7f7869ab":{"x":{},"y":{},"colour":{},"type":"scatter"},"dc5c2fce2e33":{"x":{},"y":{},"colour":{}}},"cur_data":"dc5c7f7869ab","visdat":{"dc5c7f7869ab":["function (y) ","x"],"dc5c2fce2e33":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>Comment:</strong></p>
+<ul>
+<li>Recently (from 2018 to 2020), suicide rates decreased in males aged
+45-64 and 65-74, but increased for those aged 10-14, 15-24, 25-44 and
+75+.</li>
+<li>Suicide rates were consistently highest for those males aged 75+
+over the period of 2000-2020. The suicide rate declined from highest
+42.4 in 2000 to the lowest 35.6 in 2009, and then increased to 40.5 in
+2020.</li>
+<li>Suicide rates were consistently lowest for those males aged 10-14
+over the period of 2000-2020. The suicide rate declined from 2.3 in 2000
+to 1.2 in 2007, and then increased to 3.6 in 2020.</li>
+<li>The suicide rates of those aged 10-14 were relatively stable between
+2000 and 2020.</li>
+</ul>
+</div>
+<div id="suicide-rate-for-females-by-means-of-suicide-2000-2020"
+class="section level3">
+<h3>Suicide rate for females, by means of suicide, 2000-2020</h3>
+<pre class="r"><code>female_means_plot = suicide_means_df %&gt;% 
+  filter(sex == &quot;female&quot;) %&gt;% 
+  ggplot(aes(x = year, y = rate,  color = means)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(breaks = seq(0, 2.5, 0.5)) +
+  labs(
+    title = &quot;Female Suicide Rates, by Means of Suicide, 2000-2020&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Suicides per 100k&quot;
+  )
+
+ggplotly(female_means_plot)</code></pre>
+<div id="htmlwidget-5d800f5a2cd263db730d" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5d800f5a2cd263db730d">{"x":{"data":[{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[1.5,1.4,1.4,1.4,1.5,1.4,1.4,1.4,1.4,1.5,1.5,1.6,1.7,1.8,1.8,1.8,1.9,1.9,1.9,1.8,1.8],"text":["year: 2000<br />rate: 1.5<br />means: firearm","year: 2001<br />rate: 1.4<br />means: firearm","year: 2002<br />rate: 1.4<br />means: firearm","year: 2003<br />rate: 1.4<br />means: firearm","year: 2004<br />rate: 1.5<br />means: firearm","year: 2005<br />rate: 1.4<br />means: firearm","year: 2006<br />rate: 1.4<br />means: firearm","year: 2007<br />rate: 1.4<br />means: firearm","year: 2008<br />rate: 1.4<br />means: firearm","year: 2009<br />rate: 1.5<br />means: firearm","year: 2010<br />rate: 1.5<br />means: firearm","year: 2011<br />rate: 1.6<br />means: firearm","year: 2012<br />rate: 1.7<br />means: firearm","year: 2013<br />rate: 1.8<br />means: firearm","year: 2014<br />rate: 1.8<br />means: firearm","year: 2015<br />rate: 1.8<br />means: firearm","year: 2016<br />rate: 1.9<br />means: firearm","year: 2017<br />rate: 1.9<br />means: firearm","year: 2018<br />rate: 1.9<br />means: firearm","year: 2019<br />rate: 1.8<br />means: firearm","year: 2020<br />rate: 1.8<br />means: firearm"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(68,1,84,1)","dash":"solid"},"hoveron":"points","name":"firearm","legendgroup":"firearm","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(68,1,84,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[0.4,0.4,0.5,0.4,0.5,0.4,0.5,0.4,0.5,0.4,0.4,0.4,0.5,0.5,0.5,0.5,0.6,0.6,0.6,0.6,0.4],"text":["year: 2000<br />rate: 0.4<br />means: others","year: 2001<br />rate: 0.4<br />means: others","year: 2002<br />rate: 0.5<br />means: others","year: 2003<br />rate: 0.4<br />means: others","year: 2004<br />rate: 0.5<br />means: others","year: 2005<br />rate: 0.4<br />means: others","year: 2006<br />rate: 0.5<br />means: others","year: 2007<br />rate: 0.4<br />means: others","year: 2008<br />rate: 0.5<br />means: others","year: 2009<br />rate: 0.4<br />means: others","year: 2010<br />rate: 0.4<br />means: others","year: 2011<br />rate: 0.4<br />means: others","year: 2012<br />rate: 0.5<br />means: others","year: 2013<br />rate: 0.5<br />means: others","year: 2014<br />rate: 0.5<br />means: others","year: 2015<br />rate: 0.5<br />means: others","year: 2016<br />rate: 0.6<br />means: others","year: 2017<br />rate: 0.6<br />means: others","year: 2018<br />rate: 0.6<br />means: others","year: 2019<br />rate: 0.6<br />means: others","year: 2020<br />rate: 0.4<br />means: others"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(49,104,142,1)","dash":"solid"},"hoveron":"points","name":"others","legendgroup":"others","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(49,104,142,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(49,104,142,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[1.4,1.5,1.6,1.6,1.7,1.7,1.8,1.8,1.9,1.8,1.9,1.9,1.9,1.9,1.9,2,1.9,1.9,1.7,1.7,1.5],"text":["year: 2000<br />rate: 1.4<br />means: poisoning","year: 2001<br />rate: 1.5<br />means: poisoning","year: 2002<br />rate: 1.6<br />means: poisoning","year: 2003<br />rate: 1.6<br />means: poisoning","year: 2004<br />rate: 1.7<br />means: poisoning","year: 2005<br />rate: 1.7<br />means: poisoning","year: 2006<br />rate: 1.8<br />means: poisoning","year: 2007<br />rate: 1.8<br />means: poisoning","year: 2008<br />rate: 1.9<br />means: poisoning","year: 2009<br />rate: 1.8<br />means: poisoning","year: 2010<br />rate: 1.9<br />means: poisoning","year: 2011<br />rate: 1.9<br />means: poisoning","year: 2012<br />rate: 1.9<br />means: poisoning","year: 2013<br />rate: 1.9<br />means: poisoning","year: 2014<br />rate: 1.9<br />means: poisoning","year: 2015<br />rate: 2.0<br />means: poisoning","year: 2016<br />rate: 1.9<br />means: poisoning","year: 2017<br />rate: 1.9<br />means: poisoning","year: 2018<br />rate: 1.7<br />means: poisoning","year: 2019<br />rate: 1.7<br />means: poisoning","year: 2020<br />rate: 1.5<br />means: poisoning"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(53,183,121,1)","dash":"solid"},"hoveron":"points","name":"poisoning","legendgroup":"poisoning","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(53,183,121,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(53,183,121,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[0.7,0.7,0.8,0.8,0.9,0.9,0.9,1,1,1.1,1.2,1.3,1.3,1.4,1.6,1.7,1.6,1.8,1.9,1.8,1.7],"text":["year: 2000<br />rate: 0.7<br />means: suffocation","year: 2001<br />rate: 0.7<br />means: suffocation","year: 2002<br />rate: 0.8<br />means: suffocation","year: 2003<br />rate: 0.8<br />means: suffocation","year: 2004<br />rate: 0.9<br />means: suffocation","year: 2005<br />rate: 0.9<br />means: suffocation","year: 2006<br />rate: 0.9<br />means: suffocation","year: 2007<br />rate: 1.0<br />means: suffocation","year: 2008<br />rate: 1.0<br />means: suffocation","year: 2009<br />rate: 1.1<br />means: suffocation","year: 2010<br />rate: 1.2<br />means: suffocation","year: 2011<br />rate: 1.3<br />means: suffocation","year: 2012<br />rate: 1.3<br />means: suffocation","year: 2013<br />rate: 1.4<br />means: suffocation","year: 2014<br />rate: 1.6<br />means: suffocation","year: 2015<br />rate: 1.7<br />means: suffocation","year: 2016<br />rate: 1.6<br />means: suffocation","year: 2017<br />rate: 1.8<br />means: suffocation","year: 2018<br />rate: 1.9<br />means: suffocation","year: 2019<br />rate: 1.8<br />means: suffocation","year: 2020<br />rate: 1.7<br />means: suffocation"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(253,231,37,1)","dash":"solid"},"hoveron":"points","name":"suffocation","legendgroup":"suffocation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(253,231,37,1)"}},"frame":null}],"layout":{"margin":{"t":44.4931506849315,"r":7.30593607305936,"b":40.9132420091324,"l":43.1050228310502},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Female Suicide Rates, by Means of Suicide, 2000-2020","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1999,2021],"tickmode":"array","ticktext":["2000","2005","2010","2015","2020"],"tickvals":[2000,2005,2010,2015,2020],"categoryorder":"array","categoryarray":["2000","2005","2010","2015","2020"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.32,2.08],"tickmode":"array","ticktext":["0.5","1.0","1.5","2.0"],"tickvals":[0.5,1,1.5,2],"categoryorder":"array","categoryarray":["0.5","1.0","1.5","2.0"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Suicides per 100k","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"means","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"dc5c16e837a1":{"x":{},"y":{},"colour":{},"type":"scatter"},"dc5c2bd9ca9":{"x":{},"y":{},"colour":{}}},"cur_data":"dc5c16e837a1","visdat":{"dc5c16e837a1":["function (y) ","x"],"dc5c2bd9ca9":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>Comment</strong></p>
+<ul>
+<li>For females, the rate for firearm-related suicide increased from 1.4
+in 2008 to 1.9 in 2016 and remained stable through 2020. Suicide by
+firearm became the leading means for females in 2020.</li>
+<li>The rate for poisoning-related suicide increased from 1.4 in 2000 to
+2.0 in 2015 and declined to 1.5 in 2020. Before 2016, poisoning-related
+suicide was the leading means for females.</li>
+<li>The rate for suffocation-related suicide dramatically increased from
+0.7 in 2000 to 1.9 in 2018, and then declined slightly to 1.7 in 2020.
+Overall, the rate was more than doubled over the study period.</li>
+<li>During the study period, differences in rates for suicide by
+firearm, poisoning and suffocation declined. In 2020, females had the
+highest rate for firearm suicide (1.8), followed by suffocation (1.7)
+and poisoning (1.5).</li>
+</ul>
+</div>
+<div id="suicide-rate-for-males-by-means-of-suicide-2000-2020"
+class="section level3">
+<h3>Suicide rate for males, by means of suicide, 2000-2020</h3>
+<pre class="r"><code>male_means_plot = suicide_means_df %&gt;% 
+  filter(sex == &quot;male&quot;) %&gt;% 
+  ggplot(aes(x = year, y = rate,  color = means)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(breaks = seq(0, 16, 2)) +
+  labs(
+    title = &quot;Male Suicide Rates, by Means of Suicide, 2000-2020&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Suicides per 100k&quot;
+  )
+
+ggplotly(male_means_plot)</code></pre>
+<div id="htmlwidget-0ed2a2b038d45e6bbe22" style="width:90%;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0ed2a2b038d45e6bbe22">{"x":{"data":[{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[11,11.1,11.1,10.8,10.4,10.6,10.3,10.4,10.7,10.9,11.2,11.2,11.5,11.5,11.4,11.6,12,12.4,12.6,12.3,12.5],"text":["year: 2000<br />rate: 11.0<br />means: firearm","year: 2001<br />rate: 11.1<br />means: firearm","year: 2002<br />rate: 11.1<br />means: firearm","year: 2003<br />rate: 10.8<br />means: firearm","year: 2004<br />rate: 10.4<br />means: firearm","year: 2005<br />rate: 10.6<br />means: firearm","year: 2006<br />rate: 10.3<br />means: firearm","year: 2007<br />rate: 10.4<br />means: firearm","year: 2008<br />rate: 10.7<br />means: firearm","year: 2009<br />rate: 10.9<br />means: firearm","year: 2010<br />rate: 11.2<br />means: firearm","year: 2011<br />rate: 11.2<br />means: firearm","year: 2012<br />rate: 11.5<br />means: firearm","year: 2013<br />rate: 11.5<br />means: firearm","year: 2014<br />rate: 11.4<br />means: firearm","year: 2015<br />rate: 11.6<br />means: firearm","year: 2016<br />rate: 12.0<br />means: firearm","year: 2017<br />rate: 12.4<br />means: firearm","year: 2018<br />rate: 12.6<br />means: firearm","year: 2019<br />rate: 12.3<br />means: firearm","year: 2020<br />rate: 12.5<br />means: firearm"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(68,1,84,1)","dash":"solid"},"hoveron":"points","name":"firearm","legendgroup":"firearm","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(68,1,84,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[1.2,1.3,1.4,1.3,1.3,1.4,1.4,1.3,1.4,1.3,1.4,1.5,1.5,1.5,1.5,1.6,1.7,1.6,1.7,1.7,1.7],"text":["year: 2000<br />rate:  1.2<br />means: others","year: 2001<br />rate:  1.3<br />means: others","year: 2002<br />rate:  1.4<br />means: others","year: 2003<br />rate:  1.3<br />means: others","year: 2004<br />rate:  1.3<br />means: others","year: 2005<br />rate:  1.4<br />means: others","year: 2006<br />rate:  1.4<br />means: others","year: 2007<br />rate:  1.3<br />means: others","year: 2008<br />rate:  1.4<br />means: others","year: 2009<br />rate:  1.3<br />means: others","year: 2010<br />rate:  1.4<br />means: others","year: 2011<br />rate:  1.5<br />means: others","year: 2012<br />rate:  1.5<br />means: others","year: 2013<br />rate:  1.5<br />means: others","year: 2014<br />rate:  1.5<br />means: others","year: 2015<br />rate:  1.6<br />means: others","year: 2016<br />rate:  1.7<br />means: others","year: 2017<br />rate:  1.6<br />means: others","year: 2018<br />rate:  1.7<br />means: others","year: 2019<br />rate:  1.7<br />means: others","year: 2020<br />rate:  1.7<br />means: others"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(49,104,142,1)","dash":"solid"},"hoveron":"points","name":"others","legendgroup":"others","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(49,104,142,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(49,104,142,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[2.1,2.2,2.2,2.2,2.3,2.2,2.2,2.3,2.3,2.2,2.3,2.2,2.2,2.2,2.2,2.1,2,2,1.9,1.8,1.7],"text":["year: 2000<br />rate:  2.1<br />means: poisoning","year: 2001<br />rate:  2.2<br />means: poisoning","year: 2002<br />rate:  2.2<br />means: poisoning","year: 2003<br />rate:  2.2<br />means: poisoning","year: 2004<br />rate:  2.3<br />means: poisoning","year: 2005<br />rate:  2.2<br />means: poisoning","year: 2006<br />rate:  2.2<br />means: poisoning","year: 2007<br />rate:  2.3<br />means: poisoning","year: 2008<br />rate:  2.3<br />means: poisoning","year: 2009<br />rate:  2.2<br />means: poisoning","year: 2010<br />rate:  2.3<br />means: poisoning","year: 2011<br />rate:  2.2<br />means: poisoning","year: 2012<br />rate:  2.2<br />means: poisoning","year: 2013<br />rate:  2.2<br />means: poisoning","year: 2014<br />rate:  2.2<br />means: poisoning","year: 2015<br />rate:  2.1<br />means: poisoning","year: 2016<br />rate:  2.0<br />means: poisoning","year: 2017<br />rate:  2.0<br />means: poisoning","year: 2018<br />rate:  1.9<br />means: poisoning","year: 2019<br />rate:  1.8<br />means: poisoning","year: 2020<br />rate:  1.7<br />means: poisoning"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(53,183,121,1)","dash":"solid"},"hoveron":"points","name":"poisoning","legendgroup":"poisoning","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(53,183,121,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(53,183,121,1)"}},"frame":null},{"x":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[3.4,3.7,3.8,3.9,4.2,4,4.2,4.5,4.7,4.8,5,5.2,5.2,5.1,5.6,5.8,5.7,6.4,6.7,6.6,6.1],"text":["year: 2000<br />rate:  3.4<br />means: suffocation","year: 2001<br />rate:  3.7<br />means: suffocation","year: 2002<br />rate:  3.8<br />means: suffocation","year: 2003<br />rate:  3.9<br />means: suffocation","year: 2004<br />rate:  4.2<br />means: suffocation","year: 2005<br />rate:  4.0<br />means: suffocation","year: 2006<br />rate:  4.2<br />means: suffocation","year: 2007<br />rate:  4.5<br />means: suffocation","year: 2008<br />rate:  4.7<br />means: suffocation","year: 2009<br />rate:  4.8<br />means: suffocation","year: 2010<br />rate:  5.0<br />means: suffocation","year: 2011<br />rate:  5.2<br />means: suffocation","year: 2012<br />rate:  5.2<br />means: suffocation","year: 2013<br />rate:  5.1<br />means: suffocation","year: 2014<br />rate:  5.6<br />means: suffocation","year: 2015<br />rate:  5.8<br />means: suffocation","year: 2016<br />rate:  5.7<br />means: suffocation","year: 2017<br />rate:  6.4<br />means: suffocation","year: 2018<br />rate:  6.7<br />means: suffocation","year: 2019<br />rate:  6.6<br />means: suffocation","year: 2020<br />rate:  6.1<br />means: suffocation"],"type":"scatter","mode":"lines+markers","line":{"width":3.77952755905512,"color":"rgba(253,231,37,1)","dash":"solid"},"hoveron":"points","name":"suffocation","legendgroup":"suffocation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(253,231,37,1)"}},"frame":null}],"layout":{"margin":{"t":44.4931506849315,"r":7.30593607305936,"b":40.9132420091324,"l":37.2602739726027},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Male Suicide Rates, by Means of Suicide, 2000-2020","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1999,2021],"tickmode":"array","ticktext":["2000","2005","2010","2015","2020"],"tickvals":[2000,2005,2010,2015,2020],"categoryorder":"array","categoryarray":["2000","2005","2010","2015","2020"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.63,13.17],"tickmode":"array","ticktext":["2","4","6","8","10","12"],"tickvals":[2,4,6,8,10,12],"categoryorder":"array","categoryarray":["2","4","6","8","10","12"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Suicides per 100k","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"means","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"dc5c46995887":{"x":{},"y":{},"colour":{},"type":"scatter"},"dc5c21106337":{"x":{},"y":{},"colour":{}}},"cur_data":"dc5c46995887","visdat":{"dc5c46995887":["function (y) ","x"],"dc5c21106337":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>Comment</strong></p>
+<ul>
+<li>For males, the rate for firearm-related suicide declined from 11.0
+in 2000 to 10.3 in 2006 and then increased to 12.5 in 2020. The rate for
+firearm-related suicide was much higher than that for all other suicide
+means (poisoning, suffocation and others).</li>
+<li>Overall, the rate for poisoning-related suicide declined from 2.1 in
+2000 to 1.7 in 2020. And the rate remained in a relatively low
+level.</li>
+<li>The rate for suffocation-related suicide increased from 3.4 in 2000
+to 6.7 in 2018, and then declined to 6.1 in 2020. Overall, the rate was
+almost doubled during the study period.</li>
+<li>During the study period, the difference in rates for firearm-related
+suicide and suffocation-related suicide narrowed, but the difference in
+rates for suffocation-related suicide and poisoning-related suicide
+widened.</li>
+<li>For the same suicide means, the rates for males were generally
+higher than that of females.</li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

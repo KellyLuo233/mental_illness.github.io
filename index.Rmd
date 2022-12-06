@@ -1,0 +1,28 @@
+---
+title: "Mental Health Post COVID-19 Pandemic"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+**Fei Xiao  Kelly Luo  Tongtong Zhu  Yi Fang  Yujie Huang**
+
+
+**Welcome to Our Project for P8105!**
+
+
+***Mental Health***
+
+is an important part of overall health and well-being. Mental health includes our emotional, psychological, and social well-being. Mental health problems exist frequently throughout the United States. About one in five adults suffer from a diagnosable mental illness in a given year. Many common mental illnesses, such as depression, anxiety, bipolar disorder, may increase risk of suicide.
+
+
+**So...**
+
+* What is the general status of mental illness across states in the US?
+* What is the overall trend of suicide rate in the US across years?
+* What is the difference in suicide rate by state, age, gender, and means of suicide?
+
+
+Let's begin with the general status of [mental illness](mental_illness.html)!
+
