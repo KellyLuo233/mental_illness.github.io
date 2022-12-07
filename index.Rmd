@@ -8,12 +8,15 @@ output:
     toc_float: true
 ---
 
+&nbsp;
+
 **Welcome to Our Project for P8105!**
 
+&nbsp;
 
-***Mental Health***
+### Mental Health 
 
-is an important part of overall health and well-being. Mental health includes our emotional, psychological, and social well-being. Mental health problems exist frequently throughout the United States. About one in five adults suffer from a diagnosable mental illness in a given year. Many common mental illnesses, such as depression, anxiety, bipolar disorder, may increase risk of suicide.
+Mental health is an important part of overall health and well-being. Mental health includes our emotional, psychological, and social well-being. Mental health problems exist frequently throughout the United States. About one in five adults suffer from a diagnosable mental illness in a given year. Many common mental illnesses, such as depression, anxiety, bipolar disorder, may increase risk of suicide.
 
 
 **So...**
@@ -25,11 +28,17 @@ is an important part of overall health and well-being. Mental health includes ou
 
 Let's begin with the general status of [mental illness](mental_illness.html)!
 
-**Mental Health Quiz **
+### Mental Health Quiz 
 
 There are still many harmful attitudes and misunderstandings around mental illness, which may make people ignore their mental health, fuel stigma, and make it harder to reach out for help. Take the following quiz and see if you can separate the myths from the facts.
 
 [Mental Health Quiz](https://www.cdc.gov/mentalhealth/quiz/index.htm)
 
 
-**Fei Xiao  Kelly Luo  Tongtong Zhu  Yi Fang  Yujie Huang**
+### Our Team
+
+**Fei Xiao 
+Kelly Luo  
+Tongtong Zhu 
+Yi Fang 
+Yujie Huang**

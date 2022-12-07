@@ -5,6 +5,8 @@ navbar:
   left:
       - icon: fa-github fa-lg
         href: https://github.com/KellyLuo233/mental_illness.github.io.git
+      - icon: fa-play-circle fa-lg
+        href: https://youtube.com
   right:
     - text: Sections
       menu:
@@ -31,3 +33,4 @@ output:
   html_document:
     theme: flatly
     css: style.css
+    in_header: icon.html 
