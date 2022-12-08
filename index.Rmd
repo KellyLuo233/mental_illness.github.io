@@ -2,7 +2,6 @@
 title: "Mental Health Post COVID-19 Pandemic"
 output: 
   html_document:
-    code_folding: hide
     toc: false
     toc_float: false
     includes: 
@@ -13,23 +12,42 @@ output:
   max-width: 80%;
   margin: auto;
 }
+
+h1.title {
+  font-size: 60px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+h1 { 
+  font-size: 50px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+body{ 
+  font-size: 20px;
+}
+a{
+  color: black;
+  font-weight: bold;
+}
+
 </style>
 
-
-## Welcome to Our Project for P8105!
+<center><span style="color: grey; font-size:3em"><strong>Welcome to Our Project for P8105!</strong></span></center>
 
 ---
 
 | ![1](image/1.jpg){width=300, height=300} | ![2](image/2.jpg){width=300, height=300} | ![3](image/3.jpg){width=300, height=300} |
 |:----------------------------------------:| :---------------------------------------:| :---------------------------------------:| 
-| [<span style="color:black; font-size:4em"><strong>Motivation</strong></span>](#motivation) | [<span style="color:black; font-size:4em"><strong>Quiz</strong></span>](#quiz) | [<span style="color:black; font-size:4em"><strong>Data Source</strong></span>](project_report.html) |
+| [<span style="font-size:45px">Motivation</span>](#motivation) | [<span style="font-size:45px">Quiz</span>](#quiz) | [<span style="font-size:45px">Data Source</span>](project_report.html) |
 | [![4](image/4.jpg){width=300, height=300}](project_report.html)| [![5](image/5.jpg){width=300, height=300}](analysis/project_report.html) |[![6](image/6.jpg){width=300, height=300}](analysis/project_report.html)|
-| [<span style="color:black; font-size:4em"><strong>4</strong></span>](analysis/project_report.html) | [<span style="color:black; font-size:4em"><strong>5</strong></span>](project_report.html) | [<span style="color:black; font-size:4em"><strong>Our Team</strong></span>](#team) |
+| [<span style="font-size:45px">4</span>](analysis/project_report.html) | [<span style="font-size:45px">5</span>](project_report.html) | [<span style="font-size:45px">Our Team</span>](#team) |
 
 ---
 
-
-### Motivation {#motivation}
+# Motivation {#motivation}
 
 Mental health is an important part of overall health and well-being. Mental health includes our emotional, psychological, and social well-being. Mental health problems exist frequently throughout the United States. About one in five adults suffer from a diagnosable mental illness in a given year. Many common mental illnesses, such as depression, anxiety, bipolar disorder, may increase risk of suicide.
 
@@ -45,7 +63,7 @@ Mental health is an important part of overall health and well-being. Mental heal
 
 Let's begin with the general status of [mental illness](mental_illness.html)!
 
-### Mental Health Quiz {#quiz}
+# Mental Health Quiz {#quiz}
 
 There are still many harmful attitudes and misunderstandings around mental illness, which may make people ignore their mental health, fuel stigma, and make it harder to reach out for help. Take the following quiz and see if you can separate the myths from the facts.
 <p align="center">
@@ -53,6 +71,11 @@ There are still many harmful attitudes and misunderstandings around mental illne
 </p>
 
 
-### Our Team {#team}
+# Our Team {#team}
 
-**Fei Xiao,   Kelly Luo,   Tongtong Zhu,   Yi Fang,   Yujie Huang**
+
+|[Fei Xiao](https://github.com/xiaof2) |[Kelly Luo](https://github.com/KellyLuo233)  |[Tongtong Zhu](https://github.com/TongtongZhu12) |[Yi Fang](https://github.com/yifang2605)   |[Yujie Huang](https://github.com/yh3429)|
+|:-----------:| :-----:| :----------:|  :----------:|  :----------:| 
+| | | | | |
+
+
