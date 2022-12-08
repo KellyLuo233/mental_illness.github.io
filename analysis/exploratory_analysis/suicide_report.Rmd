@@ -5,7 +5,8 @@ output:
     theme: journal
     code_folding: hide
     toc: true
-    toc_float: true
+    toc_float:
+      toc_collapsed: true
 ---
 
 ```{r setup, include=FALSE}

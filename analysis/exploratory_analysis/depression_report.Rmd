@@ -4,8 +4,9 @@ output:
   html_document:
     theme: journal
     code_folding: hide
+    toc_float:
+      toc_collapsed: true
     toc: true
-    toc_float: true
 ---
 
 ```{r, message=FALSE}
