@@ -121,8 +121,10 @@ anx_dep %>%
   hide_colorbar()
 ```
 
-###  Stratify by Biological Sex
+###  Sex Difference
+
 Stratify the reported percentage of people taking medication for worried, nervous, or anxious feelings by biological sex, we can observe a much higher percentage among females than males. There is also a faster increase in the percentage among females from 14.41% in 2018 to 16.52% in 2019. Among males, the percentage is relatively stable from 2018 to 2020, while there is an increase from 2020 to 2021. Considering the fact that COVID-19 is prevalent in the United States starting in 2020, the effect of COVID-19 on anxiety percentage is not evident for either sex.
+
 
 ```{r, message=FALSE}
 anx_dep %>%
