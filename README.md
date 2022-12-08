@@ -6,7 +6,7 @@
 
 - Check out our [website](https://kellyluo233.github.io/mental_illness.github.io)
 
-- [Website Repository](https://github.com/KellyLuo233/mental_illness.github.io)
+- [Report Repository](https://github.com/yifang2605/P8105_final_project)
 
 ## Github link to Group Members
 
