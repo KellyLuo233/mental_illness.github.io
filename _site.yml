@@ -4,6 +4,8 @@ navbar:
   title: "Home"
   left:
       - icon: fa-github fa-lg
+        href: https://github.com/yifang2605/P8105_final_project
+      - icon: fa-github fa-lg
         href: https://github.com/KellyLuo233/mental_illness.github.io.git
       - icon: fa-play-circle fa-lg
         href: https://youtube.com
