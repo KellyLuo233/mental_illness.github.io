@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -38,6 +38,7 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="image/icons-brain.png"/>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -346,7 +347,10 @@ div.tocify {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
+        <li>
+  <a href="data_process.html">Data Processing </a>
+</li>
+<li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Exploratory Analyses
      
@@ -354,16 +358,27 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="analysis/exploratory_analysis/anxiety_report.html">Anxiety</a>
-    </li>
-    <li>
-      <a href="analysis/exploratory_analysis/depression_report.html">Depression</a>
-    </li>
-    <li>
+<<<<<<< HEAD
+      <a href="mental_illness_report.html">Mental Illness</a>
+=======
       <a href="analysis/exploratory_analysis/mental_illness_report.html">Mental Illness</a>
     </li>
     <li>
+      <a href="analysis/exploratory_analysis/anxiety_report.html">Anxiety</a>
+>>>>>>> 9705444e71bc91a9cc17e6870868f7cf4741130f
+    </li>
+    <li>
+      <a href="anxiety_report.html">Anxiety</a>
+    </li>
+    <li>
+<<<<<<< HEAD
+      <a href="depression_report.html">Depression</a>
+    </li>
+    <li>
+      <a href="suicide_report.html">Suicide</a>
+=======
       <a href="analysis/exploratory_analysis/suicide_report.html">Suicide</a>
+>>>>>>> 9705444e71bc91a9cc17e6870868f7cf4741130f
     </li>
   </ul>
 </li>
@@ -375,13 +390,13 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="analysis/statistical_analysis/anxiety_model.html">Anxiety</a>
+      <a href="anxiety_model.html">Anxiety</a>
     </li>
     <li>
-      <a href="analysis/statistical_analysis/depression_model.html">Depression</a>
+      <a href="depression_model.html">Depression</a>
     </li>
     <li>
-      <a href="analysis/statistical_analysis/suicide_model.html">Suicide</a>
+      <a href="suicide_model.html">Suicide</a>
     </li>
   </ul>
 </li>
@@ -393,21 +408,31 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="analysis/dashbboards/anxiety_trend_dashboard.html">Anxiety Trend</a>
-    </li>
-    <li>
-      <a href="analysis/dashbboards/depression_trend_dashboard.html">Depression Trend</a>
-    </li>
-    <li>
-      <a href="analysis/dashbboards/suicide_dashboard.html">Suicide Trend</a>
-    </li>
-    <li>
+<<<<<<< HEAD
+      <a href="mental_dashboard.html">Mental Illness</a>
+=======
       <a href="analysis/dashbboards/mental_dashboard.html">Mental Illness</a>
     </li>
+    <li>
+      <a href="analysis/dashbboards/anxiety_trend_dashboard.html">Anxiety Trend</a>
+>>>>>>> 9705444e71bc91a9cc17e6870868f7cf4741130f
+    </li>
+    <li>
+      <a href="anxiety_trend_dashboard.html">Anxiety Trend</a>
+    </li>
+    <li>
+      <a href="depression_trend_dashboard.html">Depression Trend</a>
+    </li>
+<<<<<<< HEAD
+    <li>
+      <a href="suicide_dashboard.html">Suicide Trend</a>
+    </li>
+=======
+>>>>>>> 9705444e71bc91a9cc17e6870868f7cf4741130f
   </ul>
 </li>
 <li>
-  <a href="analysis/project_report.html">Project Report</a>
+  <a href="project_report.html">Project Report</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -443,11 +468,13 @@ and health behaviors. On average, the survey covers 100,000 persons in
 45,000 households each year. The IPUMS NHIS facilitates cross-time
 comparisons of these invaluable survey data by coding variables
 identically across time. Our analysis will use data from 2015 to 2021,
-which covers the COVID-19 period.</p>
+which covers the COVID-19 period. <a
+href="https://healthsurveys.ipums.org">VISIT IPUMS</a></p>
 <p><strong>National Survey on Drug Use and Health (NSDUH):</strong>
 Substance Abuse and Mental Health Services Administration (SAMHSA),
 Center for Behavioral Health Statistics and Quality, National Survey on
-Drug Use and Health (NSDUH), 2019 and 2020.</p>
+Drug Use and Health (NSDUH), 2019 and 2020.<a
+href="https://nsduhweb.rti.org/respweb/homepage.cfm">VISIT NSDUH</a></p>
 <p><strong>Centers for Disease Control and Prevention (CDC):</strong>
 National Center for Injury Prevention and Control. Web-based Injury
 Statistics Query and Reporting System (WISQARS) (2014-2020). National
@@ -461,7 +488,8 @@ for poisoning, and X70 for suffocation. “Other means” includes: Cut or
 pierce; Drowning; Falls; Fire or flame; Other land transport; Struck by
 or against; Other specified, classifiable injury; Other specified, not
 elsewhere classified injury; and Unspecified injury, as classified by
-ICD–10.</p>
+ICD–10.<a href="https://www.cdc.gov/injury/wisqars/index.html">VISIT
+CDC</a></p>
 </div>
 <div id="data-cleaning" class="section level2">
 <h2>Data Cleaning</h2>

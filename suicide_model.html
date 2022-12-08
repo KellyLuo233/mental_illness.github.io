@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Regression for Suicide</title>
+
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="image/icons-brain.png"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="https://github.com/KellyLuo233/mental_illness.github.io.git">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://youtube.com">
+    <span class="fa fa-play-circle fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="data_process.html">Data Processing </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Exploratory Analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mental_illness_report.html">Mental Illness</a>
+    </li>
+    <li>
+      <a href="anxiety_report.html">Anxiety</a>
+    </li>
+    <li>
+      <a href="depression_report.html">Depression</a>
+    </li>
+    <li>
+      <a href="suicide_report.html">Suicide</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Statistical Analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="anxiety_model.html">Anxiety</a>
+    </li>
+    <li>
+      <a href="depression_model.html">Depression</a>
+    </li>
+    <li>
+      <a href="suicide_model.html">Suicide</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dashboard
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mental_dashboard.html">Mental Illness</a>
+    </li>
+    <li>
+      <a href="anxiety_trend_dashboard.html">Anxiety Trend</a>
+    </li>
+    <li>
+      <a href="depression_trend_dashboard.html">Depression Trend</a>
+    </li>
+    <li>
+      <a href="suicide_dashboard.html">Suicide Trend</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project_report.html">Project Report</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Regression for Suicide</h1>
+
+</div>
+
+
+<p>Based on the visualization of suicide analysis, the US national
+suicide rates have changed a lot through time. And the differences in
+suicide rates by sex, age can be observed. We will detect the group
+difference by year, sex, and age by doing regression analysis. Since the
+suicide trend for males by various age groups is different from the
+suicide trend for females by various age groups, there might a
+interaction happening between sex and age. So, interaction term between
+sex and age group will be considered in the regression analysis.</p>
+The model we have:
+<div align="center">
+<span class="math inline">\(Suicide~per~100k = \beta_0 + \beta_1
+(Year_{i}) + \beta_2 (Sex_{i})+ \beta_3 (Age_{i}) + \beta_4
+(Sex_{i}*Age_{i})\)</span>
+</div>
+<p><br />
+</p>
+<pre class="r"><code>suicide_df = 
+  read_excel(
+    &quot;./data/suicide_data.xlsx&quot;,
+    sheet = 1,
+    col_names = TRUE) %&gt;% 
+  janitor::clean_names() %&gt;% 
+  mutate(
+    population = (suicide_no / suicide_100k) * 100000, 
+    sex = as.factor(sex),
+    age = as.factor(age)
+  )</code></pre>
+<div id="diagnostics" class="section level2">
+<h2>Diagnostics</h2>
+<pre class="r"><code>sui_reg = lm (suicide_100k ~ year + sex + age + sex*age, data = suicide_df)</code></pre>
+<p>After we build our linear model, we will check the several
+assumptions by using to produce some diagnostic plots visualizing the
+residual errors.</p>
+<ul>
+<li>Linearity of data: Ideally, the residual plot would not display any
+fitting patterns. Consequently, the red line should be roughly
+horizontal at zero. Based on our plot in the top-left chart, the
+residual plot lacks a pattern. This shows that a linear relationship
+between predictors and outcome variables can be assumed.</li>
+<li>Homogeneity of variance:In the plot on the bottom-left, it can be
+seen that the variability (variances) of the residual points is roughly
+same with the value of the fitted outcome variable, suggesting constant
+variances in the residuals errors (or heteroscedasticity) in
+overall.</li>
+<li>Normality of residuals:The normality assumption may be visually
+verified using the QQ plot of residuals. The residuals’ normal
+probability plot should roughly resemble a straight line. We may infer
+normalcy since in our plot in the top-right chart, outside of three
+outliers, most of the points roughly lie along this reference line.</li>
+<li>Outliers and high levarage points: The plot on the bottom-right
+highlights the top 3 potential outliers (#10, #12 and #36).And none of
+them exceed the contour of cook’s distance to be considered as
+influential observations.</li>
+</ul>
+<pre class="r"><code>par(mfrow = c(2, 2))
+plot(sui_reg) </code></pre>
+<p><img src="suicide_model_files/figure-html/unnamed-chunk-3-1.png" width="90%" /></p>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<pre class="r"><code>sui_reg %&gt;% 
+  summary() %&gt;%
+   broom::glance() %&gt;% kbl(
+    caption     = &quot;Key Statistics for Model Performance&quot;
+    , col.names = c(
+        &quot;R-squared&quot;, &quot;Adj. R-squared&quot;
+      , &quot;Sigma&quot;, &quot;F-statistic&quot;, &quot;p-value&quot;, &quot;df&quot;, &quot;Residual df&quot;, &quot;N&quot;)
+      , digits    = c( 2, 2, 0, 2, 5, 0, 0, 0)
+    ) %&gt;%
+  kable_paper(&quot;striped&quot;, full_width = F) %&gt;%
+  column_spec(1, bold = T)</code></pre>
+<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Key Statistics for Model Performance
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+R-squared
+</th>
+<th style="text-align:right;">
+Adj. R-squared
+</th>
+<th style="text-align:right;">
+Sigma
+</th>
+<th style="text-align:right;">
+F-statistic
+</th>
+<th style="text-align:right;">
+p-value
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+Residual df
+</th>
+<th style="text-align:right;">
+N
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+0.99
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1994.27
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+239
+</td>
+<td style="text-align:right;">
+252
+</td>
+</tr>
+</tbody>
+</table>
+<p>As F-statistic is 1994.27, df=12, and the p-value is much less than
+0.05, so we reject the null hypothesis at the significance level of
+0.05. Hence there is a significant relationship between the outcome
+<code>suicide rate</code> and the variables (<code>Year</code>,
+<code>Sex</code>, <code>Age</code>, and the interaction term
+<code>Sex*Age</code>)in the linear regression model of the suicide
+dataset.</p>
+<pre class="r"><code>sui_reg %&gt;% 
+  summary() %&gt;%
+   broom::tidy() %&gt;% 
+  kbl(
+      caption     = &quot;Effect of Selected Predictors on the US National Suicide Rate, 2000-2020&quot;
+    , col.names   = c(&quot;Predictor&quot;, &quot;Estimate&quot;, &quot;SE&quot;, &quot;t-statistic&quot;, &quot;p-value&quot;),
+     digits= 6) %&gt;%
+  # further map to a more professional-looking table
+  kable_paper(&quot;striped&quot;, full_width = F) %&gt;%
+  # make variable names bold
+  column_spec(1, bold = T)</code></pre>
+<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Effect of Selected Predictors on the US National Suicide Rate, 2000-2020
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Predictor
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+SE
+</th>
+<th style="text-align:right;">
+t-statistic
+</th>
+<th style="text-align:right;">
+p-value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-345.151190
+</td>
+<td style="text-align:right;">
+25.419955
+</td>
+<td style="text-align:right;">
+-13.577962
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+year
+</td>
+<td style="text-align:right;">
+0.172262
+</td>
+<td style="text-align:right;">
+0.012646
+</td>
+<td style="text-align:right;">
+13.621790
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+sexmale
+</td>
+<td style="text-align:right;">
+1.100000
+</td>
+<td style="text-align:right;">
+0.375143
+</td>
+<td style="text-align:right;">
+2.932218
+</td>
+<td style="text-align:right;">
+0.003692
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+age15-24
+</td>
+<td style="text-align:right;">
+3.061905
+</td>
+<td style="text-align:right;">
+0.375143
+</td>
+<td style="text-align:right;">
+8.161975
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+age25-44
+</td>
+<td style="text-align:right;">
+5.490476
+</td>
+<td style="text-align:right;">
+0.375143
+</td>
+<td style="text-align:right;">
+14.635704
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+age45-64
+</td>
+<td style="text-align:right;">
+7.304762
+</td>
+<td style="text-align:right;">
+0.375143
+</td>
+<td style="text-align:right;">
+19.471960
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+age65-74
+</td>
+<td style="text-align:right;">
+3.809524
+</td>
+<td style="text-align:right;">
+0.375143
+</td>
+<td style="text-align:right;">
+10.154868
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+age75+
+</td>
+<td style="text-align:right;">
+2.819048
+</td>
+<td style="text-align:right;">
+0.375143
+</td>
+<td style="text-align:right;">
+7.514602
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+sexmale:age15-24
+</td>
+<td style="text-align:right;">
+12.819048
+</td>
+<td style="text-align:right;">
+0.530532
+</td>
+<td style="text-align:right;">
+24.162638
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+sexmale:age25-44
+</td>
+<td style="text-align:right;">
+16.452381
+</td>
+<td style="text-align:right;">
+0.530532
+</td>
+<td style="text-align:right;">
+31.011113
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+sexmale:age45-64
+</td>
+<td style="text-align:right;">
+17.504762
+</td>
+<td style="text-align:right;">
+0.530532
+</td>
+<td style="text-align:right;">
+32.994747
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+sexmale:age65-74
+</td>
+<td style="text-align:right;">
+18.485714
+</td>
+<td style="text-align:right;">
+0.530532
+</td>
+<td style="text-align:right;">
+34.843745
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+sexmale:age75+
+</td>
+<td style="text-align:right;">
+33.490476
+</td>
+<td style="text-align:right;">
+0.530532
+</td>
+<td style="text-align:right;">
+63.126239
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+</tbody>
+</table>
+<p>According to the table, all the p-values are quite close to 0, so our
+regression indicates that each predictor(<code>Year</code>,
+<code>Sex</code>, <code>Age</code>) and the interaction term
+(<code>Sex*Age</code>) have the statistically significant relationship
+with the suicide rates.</p>
+<p>The estimate for predictor <code>Year</code> is 0.17, which means
+that when one year increases, the suicide rate will also increase 0.17,
+assuming all other variables stay constant. This finding is not totally
+consistent with the summary described in our previous visualization
+process, probably because the suicide rate trend ripple is not enough
+obvious or the variable <code>Year</code> is affected by other unknown
+variables.</p>
+<p>The estimate for predictor <code>Sexmale</code> is 1.10, which means
+that when sex changes from male to female, the value of the suicide rate
+will increase 1.10, assuming all other variables stay constant. Among
+all the females, the predictor <code>Age45-64</code> has the largest
+value of the estimate, showing that the age group 45-64 has the higher
+suicide rates than all other age groups. Among all the males, we need to
+combine the estimates with age groups and the interaction terms, and
+obtain that the age group 75+ has the higher suicide rates than all
+other age groups. And these findings match with our summary from the
+foregoing descriptive analyses.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
