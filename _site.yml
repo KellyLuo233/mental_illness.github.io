@@ -31,14 +31,14 @@ navbar:
         href: analysis/statistical_analysis/suicide_model.html
     - text: 'Dashboard'
       menu:
+      - text: "Mental Illness"
+        href: analysis/dashbboards/mental_dashboard.html
       - text: "Anxiety Trend"
         href: analysis/dashbboards/anxiety_trend_dashboard.html
       - text: "Depression Trend"
         href: analysis/dashbboards/depression_trend_dashboard.html
       - text: "Suicide Trend"
         href: analysis/dashbboards/suicide_dashboard.html
-      - text: "Mental Illness"
-        href: analysis/dashbboards/mental_dashboard.html
     - text: 'Project Report'
       href: analysis/project_report.html
   
