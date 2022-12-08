@@ -5,7 +5,7 @@ output:
     orientation: columns
     vertical_layout: fill
     source: embed
-    theme: cerulean
+    theme: cosmo
 ---
 
 ```{r setup, include=FALSE}
@@ -125,6 +125,7 @@ ggplotly(ser_mental_plot)
 ```
 
 ### Top 10 states with any mental illness
+
 ```{r}
 any_top10_plot =
   mental_df %>% 
@@ -147,6 +148,7 @@ ggplotly(any_top10_plot)
 ```
 
 ### Top 10 states with serious mental illness
+
 ```{r}
 ser_top10_plot =
   mental_df %>% 

@@ -4,9 +4,12 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    navbar:
+      - { icon: fa-home, href: index.html, align: right }
     source: embed
     theme: flatly
 ---
+
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
