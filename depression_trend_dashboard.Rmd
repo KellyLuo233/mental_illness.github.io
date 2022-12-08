@@ -29,7 +29,7 @@ theme_set(
 )
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 depression = 
   read_csv("data/nhis_data01.csv") %>% 
   janitor::clean_names() %>% 
@@ -73,7 +73,7 @@ Column {data-width=650}
 -----------------------------------------------------------------------
 
 ### Percentage of people reported taken medication for depression
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 depression %>%
   drop_na(deprx) %>% 
   group_by(year, deprx) %>% 
@@ -106,7 +106,7 @@ depression %>%
 Column {.tabset}
 -------------------------------------
 ### By Biological sex
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 depression %>%
   drop_na(sex, deprx) %>% 
   group_by(sex, year, deprx) %>% 
@@ -144,7 +144,7 @@ depression %>%
 ```
 
 ### By household income to poverty line ratio
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 depression %>%
   drop_na(poverty, deprx) %>% 
   group_by(poverty, year, deprx) %>% 
@@ -175,7 +175,7 @@ depression %>%
 ```
 
 ### By martial status 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 depression %>%
   drop_na(marst, deprx) %>% 
   group_by(marst, year, deprx) %>% 
@@ -208,7 +208,7 @@ depression %>%
 Age distribution
 =====================================
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 age_plot = 
   depression %>%
   drop_na(age, deprx) %>% 
@@ -221,7 +221,8 @@ age_plot =
     fill = "Whether taken medicine for depression"
   )
 
-ggplotly(age_plot)
+ggplotly(age_plot) %>%
+  layout(legend = list(orientation = "h"))
 ```
 
 Level and Frequency of Depression {data-orientation=columns}
@@ -232,7 +233,7 @@ Column {data-width=500}
 
 ### Level of depression
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r,echo = FALSE, message=FALSE}
 depression %>%
   drop_na(depfeelevl) %>% 
   group_by(year, depfeelevl) %>% 
@@ -268,7 +269,7 @@ Column {data-width=500}
 
 ### Frequency of depression
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r,echo = FALSE, message=FALSE}
 depression %>% 
   drop_na(depfreq) %>% 
   group_by(year, depfreq) %>% 

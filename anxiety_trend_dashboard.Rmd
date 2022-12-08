@@ -5,7 +5,7 @@ output:
     orientation: columns
     vertical_layout: fill
     source: embed
-    theme: sandstone
+    theme: flatly
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +29,7 @@ theme_set(
 )
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 anxiety = 
   read_csv("data/nhis_data01.csv") %>% 
   janitor::clean_names() %>% 
@@ -79,7 +79,7 @@ Column {data-width=650}
 -----------------------------------------------------------------------
 
 ### Percentage of people reported taken medication for anxiety
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 anxiety %>%
   drop_na(worrx) %>% 
   group_by(year, worrx) %>% 
@@ -113,7 +113,7 @@ Column {.tabset}
 -------------------------------------
 
 ### By Biological sex
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 anxiety %>%
   drop_na(sex, worrx) %>% 
   group_by(sex, year, worrx) %>% 
@@ -151,7 +151,7 @@ anxiety %>%
 ```
 
 ### By household income to the poverty line ratio
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 anxiety %>%
   drop_na(poverty, worrx) %>% 
   group_by(poverty, year, worrx) %>% 
@@ -183,7 +183,7 @@ anxiety %>%
 ```
 
 ### By martial status 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 anxiety %>%
   drop_na(marst, worrx) %>% 
   group_by(marst, year, worrx) %>% 
@@ -216,7 +216,7 @@ anxiety %>%
 Age distribution
 =====================================
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 age_plot = 
   anxiety %>%
   drop_na(age, worrx) %>% 
@@ -227,9 +227,10 @@ age_plot =
   facet_wrap(~year) +
   labs(
     fill = "Whether taken medicine for anxiety"
-  )
+  ) 
 
-ggplotly(age_plot)
+ggplotly(age_plot) %>%
+  layout(legend = list(orientation = "h"))
 ```
 
 Level and Frequency of Anxiety {data-orientation=columns}
@@ -240,7 +241,7 @@ Column {data-width=500}
 
 ### Level of anxiety
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r,echo = FALSE, message=FALSE}
 anxiety %>%
   drop_na(worfeelevl) %>% 
   group_by(year, worfeelevl) %>% 
@@ -276,7 +277,7 @@ Column {data-width=500}
 
 ### Frequency of anxiety
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r,echo = FALSE, message=FALSE}
 anxiety %>% 
   drop_na(worfreq) %>% 
   group_by(year, worfreq) %>% 

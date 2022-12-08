@@ -14,38 +14,39 @@ navbar:
     - text: 'Exploratory Analyses'
       menu:
       - text: 'Mental Illness'
-        href: analysis/exploratory_analysis/mental_illness_report.html
+        href: mental_illness_report.html
       - text: 'Anxiety'
-        href: analysis/exploratory_analysis/anxiety_report.html
+        href: anxiety_report.html
       - text: 'Depression'
-        href: analysis/exploratory_analysis/depression_report.html
+        href: depression_report.html
       - text: 'Suicide'
-        href: analysis/exploratory_analysis/suicide_report.html
+        href: suicide_report.html
     - text: 'Statistical Analyses'
       menu:
       - text: "Anxiety"
-        href: analysis/statistical_analysis/anxiety_model.html
+        href: anxiety_model.html
       - text: "Depression"
-        href: analysis/statistical_analysis/depression_model.html
+        href: depression_model.html
       - text: "Suicide"
-        href: analysis/statistical_analysis/suicide_model.html
+        href: suicide_model.html
     - text: 'Dashboard'
       menu:
       - text: "Mental Illness"
-        href: analysis/dashbboards/mental_dashboard.html
+        href: mental_dashboard.html
       - text: "Anxiety Trend"
-        href: analysis/dashbboards/anxiety_trend_dashboard.html
+        href: anxiety_trend_dashboard.html
       - text: "Depression Trend"
-        href: analysis/dashbboards/depression_trend_dashboard.html
+        href: depression_trend_dashboard.html
       - text: "Suicide Trend"
-        href: analysis/dashbboards/suicide_dashboard.html
+        href: suicide_dashboard.html
     - text: 'Project Report'
-      href: analysis/project_report.html
-  
+      href: project_report.html
       
 output:
   html_document:
-    theme: flatly
+    theme: cosmo
+    toc : true
+    toc_float: true
     css: style.css
     includes:
       in_header: icon.html
