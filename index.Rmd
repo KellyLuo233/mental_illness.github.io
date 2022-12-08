@@ -2,10 +2,11 @@
 title: "Mental Health Post COVID-19 Pandemic"
 output: 
   html_document:
-    toc: true
+    code_folding: hide
+    toc: false
+    toc_float: false
     includes: 
       in_header: hero-image.html
-    toc_float: true
 ---
 
 

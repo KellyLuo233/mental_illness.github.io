@@ -32,13 +32,13 @@ navbar:
     - text: 'Dashboard'
       menu:
       - text: "Mental Illness"
-        href: mental_dashboard.html
+        href: ./dashboard/mental_dashboard.html
       - text: "Anxiety Trend"
-        href: anxiety_trend_dashboard.html
+        href: ./dashboard/anxiety_trend_dashboard.html
       - text: "Depression Trend"
-        href: depression_trend_dashboard.html
+        href: ./dashboard/depression_trend_dashboard.html
       - text: "Suicide Trend"
-        href: suicide_dashboard.html
+        href: ./dashboard/suicide_dashboard.html
     - text: 'Project Report'
       href: project_report.html
       
