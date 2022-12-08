@@ -9,6 +9,8 @@ navbar:
         href: https://youtube.com
         
   right:
+    - text: 'Data Processing '
+      href: data_process.html
     - text: 'Exploratory Analyses'
       menu:
       - text: 'Anxiety'
@@ -45,4 +47,5 @@ output:
   html_document:
     theme: flatly
     css: style.css
-    in_header: icon.html 
+    includes:
+      in_header: icon.html
