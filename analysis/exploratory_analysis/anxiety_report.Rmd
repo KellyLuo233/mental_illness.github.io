@@ -87,7 +87,8 @@ anx_dep =
 ```
 
 
-## Percentage of People Reported Taken Medication for Worried, Nervous, or Anxious Feelings
+## Medication Proportion
+
 According to the plot, from 2015 to 2021, the percentage of people who report taking medication for worry, stress or anxiety is constantly increasing from 9.13% in 2015 to 13.57% in 2021. We can observe a rapid increase from 2017 to 2019 and, contrary to our expectations, a relatively slow increase from 2019 to 2020. The effect of COVID-19 on anxiety percentage is not evident in this plot.
 
 ```{r, message=FALSE}
@@ -164,7 +165,7 @@ anx_dep %>%
 
 ```
 
-### Stratify by Ratio of Family Income to Poverty Threshold
+### Family Income
 
 Stratify the percentage of people reported taken medication for worried, nervous, or anxious feelings by the ratio of household income to the poverty line, we can clearly see that the lower the household income, the higher their percentage. The percentage among the lowest income stratum decreased rapidly from 17.30% in 2017 to 15.84% in 2018, which is the opposite of what happened in the other two strata. Although the percentage of the lowest income stratum decreased rapidly from 2017 to 2018, they still had the highest percentage of the three strata, and this decrease was followed by a rapid increase from 15.84% in 2018 to 18.58% in 2019. From 2020 to 2021, the percentage decreases for the other two strata, while for the highest-income stratum, the percentage steadily increases. Although household income appears to have an effect on anxiety, the effect of COVID-19 on anxiety is not evident for all three strata.
 
@@ -201,7 +202,7 @@ anx_dep %>%
   
 ```
 
-### Stratify by Current Martial Status
+### Martial Status
 Stratify the percentage of people reported taken medication for worried, nervous, or anxious feelings by current martial status, we can observe a rapid increase from 14.31% in 2019 to 17.49% in 2020 in those separated. Considering the timing, this could be an effect of COVID-19.For other strata, the effect of COVID-19 is not obvious.
 
 ```{r, message=FALSE}
@@ -257,7 +258,7 @@ ggplotly(age_plot) %>%
   layout(legend = list(orientation = "h"))
 ```
 
-## Frequency of Worried, Nervous, Or Anxious Feelings
+## Frequency 
 
 From this bar plot about how often people feel worried, nervous, or anxious, we can observe that the frequency is steadily increasing from 2015 to 2021. There is also a rapid increase from 2019 to 2020, which could be COVID-19 related.
 
@@ -293,7 +294,8 @@ anx_dep %>%
   )
 ```
 
-## Level of Worried, Nervous, Or Anxious Feelings
+## Stages of Anxiety
+
 From this bar plot about the level of worried, nervous, or anxious feelings people felt last time, we can observe a relatively large increase from 2018 to 2019 in the percentage of people who felt worried, stressed, or anxious a lot or between a little and a lot. However, the distribution did not change much from 2019 to 2020, which indicates that the impact of COVID-19 on level of anxiety may not be significant.
 
 ```{r, message=FALSE}
