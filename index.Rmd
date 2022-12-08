@@ -22,8 +22,10 @@ Mental health is an important part of overall health and well-being. Mental heal
 **So...**
 
 * What is the general status of mental illness across states in the US?
-* What is the overall trend of suicide rate in the US across years?
-* What is the difference in suicide rate by state, age, gender, and means of suicide?
+* What is the overall trend of the percentage, frequency and level of anxiety and depression in the US across years?
+* How do trends in anxiety and depression percentages differ by biological sex, household income, marital status, and age?
+* What is the overall suicide trend across years? How does suicide differ by state, age, sex and means?
+* What is the association between taking depression or anxious medication and COVID-19 exposure? 
 
 
 Let's begin with the general status of [mental illness](mental_illness.html)!
