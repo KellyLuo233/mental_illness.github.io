@@ -13,12 +13,12 @@ navbar:
       href: data_process.html
     - text: 'Exploratory Analyses'
       menu:
+      - text: 'Mental Illness'
+        href: analysis/exploratory_analysis/mental_illness_report.html
       - text: 'Anxiety'
         href: analysis/exploratory_analysis/anxiety_report.html
       - text: 'Depression'
         href: analysis/exploratory_analysis/depression_report.html
-      - text: 'Mental Illness'
-        href: analysis/exploratory_analysis/mental_illness_report.html
       - text: 'Suicide'
         href: analysis/exploratory_analysis/suicide_report.html
     - text: 'Statistical Analyses'

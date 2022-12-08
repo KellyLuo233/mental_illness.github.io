@@ -69,7 +69,7 @@ mental_df =
     state_abb = replace(state_abb, state == "District of Columbia", "DC"))
 ```
 
-## Map for percent of adults reporting any mental illness, by state between 2019-2020
+## State Map (2019-2020)
 
 According to the mental health data collected between 2019 -2020, the mental illness percents are high in the US overall, with variations between states. Among them, Utah has the highest rate of mental illness, 29.7%; Florida has the lowest rate of mental illness, 17.5%.
 
@@ -94,7 +94,7 @@ ggplotly(state_mental)
   
 ```
 
-## Any/Serious Mental illness numbers (million), by region between 2019-2020
+##  Region Statistic (2019-2020)
 
 Both any mental illness and serious mental illness are highest in the South, lowest in the Northeast. And the number of mental illness in the South is more than twice that of the Northeast. 
 
@@ -134,7 +134,7 @@ grid.arrange(any_mental_plot, ser_mental_plot, ncol =2)
 ```
 
 
-## Any/Serious Mental illness percent, Top 10 states, 2019-2020
+## Top 10 States (2019-2020)
 
 The top 10 states for any and serious mental illness are 8/10 the same, except Washington, Rhode Island, Arkansas and Indiana. Utah has the highest any/serious mental illness percent. 
 
