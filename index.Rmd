@@ -15,7 +15,7 @@ output:
 
 | [![1](image/1.jpg){width=200, height=200}](analysis/project_report.html)| [![2](image/2.jpg){width=200, height=200}](analysis/project_report.html) |[![3](image/3.jpg){width=200, height=200}](analysis/project_report.html)|
 |:--:| :--:| :--:| 
-| [*Motivation*](analysis/project_report.html) | [*Mental Health Self-Diagnosis*](analysis/project_report.html) | [*Data Source*](analysis/project_report.html) |
+| [*Motivation*](analysis/project_report.html) | [*Mental Health Quiz*](analysis/project_report.html) | [*Data Source*](analysis/project_report.html) |
 | [![4](image/4.jpg){width=200, height=200}](analysis/project_report.html)| [![5](image/5.jpg){width=200, height=200}](analysis/project_report.html) |[![6](image/6.jpg){width=200, height=200}](analysis/project_report.html)|
 | [*4*](analysis/project_report.html) | [*5*](analysis/project_report.html) | [*Our Team*](analysis/project_report.html) |
 
@@ -40,7 +40,7 @@ Mental health is an important part of overall health and well-being. Mental heal
 
 Let's begin with the general status of [mental illness](mental_illness.html)!
 
-### Mental Health Self-Diagnosis 
+### Mental Health Quiz 
 
 There are still many harmful attitudes and misunderstandings around mental illness, which may make people ignore their mental health, fuel stigma, and make it harder to reach out for help. Take the following quiz and see if you can separate the myths from the facts.
 
