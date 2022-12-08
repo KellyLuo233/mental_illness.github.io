@@ -100,7 +100,7 @@ suicide_means_df =
   
 ```
 
-## National trend of suicide rate, 2000-2020, (per 100K, per year)
+## National Trend (2000-2020)
 
 The US national suicide rates increase from 2000 to 2018, then decline from 2018 to 2020. The average suicide rate from 2000 to 2020 is 14.2 per 100,000 (represented with red dot line).
 
@@ -127,9 +127,9 @@ ggplotly(suicide_plot)
    
 ```
 
-## Stratify by state
+## State Level 
 
-### Cumulative suicide rate for each state, 2014-2020
+### Cumulative Suicide Rate 
 
 Wyoming has the highest suicide rate and New Jersey has the lowest suicide rate from 2014-2020.
 The top 5 states with high cumulative suicide rates are Wyoming, Alaska, Montana, New Mexico, and Idaho; the top 5 states with low cumulative suicide rates are New Jersey, New York, Massachusetts, Maryland and Connecticut.
@@ -156,7 +156,7 @@ suicide_state_df %>%
 ```
 
 
-### Suicide rate for each state over years, 2014-2020
+### Suicide Rate  
 
 Between 2014 and 2020, the state with the largest change in suicide rate is Wyoming, from 20.6 to 30.5; the state with the smallest change in suicide rate is New York, from 7.8 to 8.3.
 
@@ -173,10 +173,9 @@ suicide_state_df %>%
 
 ```
 
+## Sex, Age, Combination
 
-## Stratify by sex, age and both
-
-### Suicide rate by sex
+### Sex
 
 Nationally, the overall suicide rate for males is about 4 times that of females. For females, suicide rates peak in 2018 and decline since then; for males, suicide rates peak in 2017 and decline since then. From year 2000 to 2020, the male suicide rate remains apparently higher than the female suicide rate, and the ratio is constantly about 4:1.
 
@@ -218,7 +217,7 @@ grid.arrange(total_sex_plot, year_sex_plot, ncol = 2 )
 ```
 
 
-### Suicide rate by age
+### Age
 
 Nationally, aged 45-64 had the highest suicide rate, second highest group is aged 75+. The 10-14 aged group has the lowest suicide rate. From year 2000 to 2020, the suicide rate of group aged 10-14 remains roughly static and small. Suicide rates in all other age groups show an overall upward trend. Among them, the group aged 25-44 has the largest change, roughly from 10 to 18 suicide rate per 100k. The suicide rates of those aged 45-64 and aged 65-74 start to drop since 2018.
 
@@ -259,7 +258,9 @@ year_age_plot = suicide_df %>%
 grid.arrange(total_age_plot, year_age_plot, ncol = 2 )
 ```
 
-### Suicide rate for females, by age group, 2000-2020
+### Sex and Age
+
+- Suicide rate for females, by age group, 2000-2020
 
 Recently (from 2018 to 2020), suicide rates decrease in females aged 25-44, 45-64, 65-74 and 75+, but increase for those aged 15-24 and keep constant for those aged 10-14. Suicide rates are highest for those females aged 45-64 over the period of 2000-2020. The suicide rates increase from 6.2 in 2000 to the highest 10.2 in 2015, and then decline to 7.9 in 2020. Suicide rates are consistently lowest for those females aged 10-14 over the period of 2000-2020. The suicide rates increase from 0.6 in 2000 to the highest 2.0 in 2018, and then keep constant through 2020.But the rate more than triples from 0.6 (2000) to 2.0 (2020). The suicide rates of those aged 75+ are relatively stable between 2000 and 2020.
 
@@ -285,8 +286,7 @@ female_plot = suicide_df %>%
 ggplotly(female_plot)
 ```
 
-
-### Suicide rate for males, by age group, 2000-2020
+-  Suicide rate for males, by age group, 2000-2020
 
 Recently (from 2018 to 2020), suicide rates decrease in males aged 45-64 and 65-74, but increase for those aged 10-14, 15-24, 25-44 and 75+. Suicide rates are consistently highest for those males aged 75+ over the period of 2000-2020. The suicide rate decline from highest 42.4 in 2000 to the lowest 35.6 in 2009, and then increase to 40.5 in 2020. Suicide rates are consistently lowest for those males aged 10-14 over the period of 2000-2020. The suicide rate declines from 2.3 in 2000 to 1.2 in 2007, and then increase to 3.6 in 2020. The suicide rates of those aged 10-14 are relatively stable between 2000 and 2020.
 
@@ -313,7 +313,7 @@ ggplotly(male_plot)
 
 ```
 
-## Stratify by sex and means of suicide
+## Sex and means of suicide
 
 ### Suicide rate for females, by means of suicide, 2000-2020
 
