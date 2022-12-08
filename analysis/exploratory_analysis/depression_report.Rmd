@@ -87,7 +87,8 @@ anx_dep =
     ) 
 ```
 
-## Percentage of People Reported Taken Medication for Depression
+## Medication Proportion
+
 According to the plot, the proportion of people reported taken medication for depression increased from 8.75% in 2015 to 11.42% in 2020, followed by a slight decrease from 2020 to 2021. COVID-19 appears to have a limited impact on depression percentage.
 
 ```{r, message=FALSE}
@@ -121,7 +122,7 @@ anx_dep %>%
   hide_colorbar()
 ```
 
-###  Stratify by Biological Sex
+###  Sex Difference
 
 Stratify the reported percentage of people taking medication for depression by biological sex, we can observe a much higher percentage among females than males. There are also a faster increase in the percentage among females from 12.68% in 2017 to 15.14% in 2020 and a decrease from 15.14% in 2020 to 14.52% in 2021. Contrary to females, the percentage slightly decreased from 2018 to 2019 and then increased from 2020 to 2021 among males. The effect of COVID-19 is not evident fro either sex from this plot.
 
@@ -163,7 +164,7 @@ anx_dep %>%
 
 ```
 
-### Stratify by Ratio of Family Income to Poverty Threshold
+### Family Income 
 
 Stratify the percentage of people reported taken medication for depression by the ratio of household income to the poverty line, we can clearly see that the lower the household income, the higher their percentage. The percentage among the lowest-income stratum decreased from 17.41% in 2017 to 16.53% in 2018, which is the opposite of what happened in the other two strata. The change in the percentage is quite stable from 2018 to 2019 among all three strata. There is a rapid increase from 17.02% in 2019 to 18.66% in 2020, which may indicate that people belonging to the lowest-income stratum are affected by COVID-19 related depression. For other two strata, the effect of COVID-19 is not evident.
 
@@ -199,7 +200,8 @@ anx_dep %>%
   
 ```
 
-### Stratify by Current Martial Status
+###  Martial Status
+
 Stratify the percentage of people reported taken medication for depression by current martial status, we can observe a rapid decrease from 17.26% in 2016 to 13.12% in 2019 among separated, while this downward trend slows from 2018 to 2019 and reverses from 2019 to 2020. This reversal may be associated with COVID-19. The trends are similar for married and never married, divorced and widowed. The effect of COVID-19 is not evident for these three strata.
 
 ```{r, message=FALSE}
@@ -291,7 +293,8 @@ anx_dep %>%
   )
 ```
 
-## Level of Depression
+## Stages of Depression
+
 From this bar plot about the level of depression last time, we can see that the percentage of people who felt "a lot" or "between a little and a lot depression" is stable over the time period and a decrease of percentage of people feel "a lot depression" from 2018 to 2019. There is also no clear evidence of the effect of COVID-19 on the level of depression.
 
 ```{r, message=FALSE}
