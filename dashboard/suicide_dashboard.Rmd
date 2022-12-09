@@ -81,7 +81,7 @@ suicide_means_df =
 ```
 
 
-Overall suicide
+Overall Suicide
 =====================================
 
 Column {data-width=500}
@@ -113,7 +113,7 @@ ggplotly(suicide_plot)
 
 Column {data-width=500}
 -------------------------------------
-### By state
+### By State
 ```{r, message=FALSE}
 state_plot = suicide_state_df %>% 
   group_by(state) %>% 
@@ -138,12 +138,12 @@ ggplotly(state_plot)
 
 ```
 
-Suicide by sex
+Suicide by Sex
 =====================================
 
 Column {data-width=500}
 -----------------------------------------------------------------------
-### By sex
+### By Sex
 ```{r, message=FALSE}
 total_sex_plot = suicide_df %>% 
   group_by(sex) %>% 
@@ -166,7 +166,7 @@ ggplotly(total_sex_plot)
 
 Column {data-width=500}
 -----------------------------------------------------------------------
-### By sex over years
+### By Sex over Years
 ```{r}
 year_sex_plot = suicide_df %>% 
   group_by(year, sex) %>% 
@@ -188,12 +188,12 @@ year_sex_plot = suicide_df %>%
 ggplotly(year_sex_plot)
 ```
 
-Suicide by age
+Suicide by Age
 =====================================
 
 Column {data-width=500}
 -----------------------------------------------------------------------
-### By age
+### By Age
 ```{r, message=FALSE}
 total_age_plot = suicide_df %>% 
   group_by(age) %>% 
@@ -216,7 +216,7 @@ ggplotly(total_age_plot)
 
 Column {data-width=500}
 -----------------------------------------------------------------------
-### By age over years
+### By Age over Years
 ```{r}
 year_age_plot = suicide_df %>% 
   group_by(year, age) %>% 
@@ -238,12 +238,12 @@ year_age_plot = suicide_df %>%
 ggplotly(year_age_plot)
 ```
 
-Suicide by means
+Suicide by Means
 =====================================
 
 Column {data-width=500}
 -----------------------------------------------------------------------
-### Female suicide by means
+### Female Suicide by Means
 ```{r, message=FALSE}
 female_means_plot = suicide_means_df %>% 
   filter(sex == "female") %>% 
@@ -263,7 +263,7 @@ ggplotly(female_means_plot)
 
 Column {data-width=500}
 -----------------------------------------------------------------------
-### Male suicide by means
+### Male Suicide by Means
 ```{r}
 male_means_plot = suicide_means_df %>% 
   filter(sex == "male") %>% 
