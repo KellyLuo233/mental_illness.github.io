@@ -74,7 +74,7 @@ Percentage of Depression
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Percentage of people reported taken medication for depression
+### Percentage of People Reported Taken Medication for Depression
 ```{r}
 depression %>%
   drop_na(deprx) %>% 
@@ -107,7 +107,7 @@ depression %>%
 
 Column {.tabset}
 -------------------------------------
-### By Biological sex
+### By Biological Sex
 ```{r}
 depression %>%
   drop_na(sex, deprx) %>% 
@@ -145,7 +145,7 @@ depression %>%
 
 ```
 
-### By household income to poverty line ratio
+### By Household Income to Poverty Line Ratio
 ```{r}
 depression %>%
   drop_na(poverty, deprx) %>% 
@@ -176,7 +176,7 @@ depression %>%
   )
 ```
 
-### By martial status 
+### By Martial Status 
 ```{r}
 depression %>%
   drop_na(marst, deprx) %>% 
@@ -207,7 +207,7 @@ depression %>%
   )
 ```
 
-Age distribution
+Age Distribution
 =====================================
 
 ```{r}
@@ -233,7 +233,7 @@ Level and Frequency of Depression {data-orientation=columns}
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Level of depression
+### Level of Depression
 
 ```{r,echo = FALSE, message=FALSE}
 depression %>%
@@ -269,7 +269,7 @@ depression %>%
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Frequency of depression
+### Frequency of Depression
 
 ```{r,echo = FALSE, message=FALSE}
 depression %>% 
