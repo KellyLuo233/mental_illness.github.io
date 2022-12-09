@@ -313,7 +313,7 @@ ggplotly(male_plot)
 
 ```
 
-## Sex and Means of Suicide
+## Sex and Means of Suicide 
 
 ### Suicide Rate for Females, by Means of Suicide, 2000-2020
 
