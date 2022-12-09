@@ -81,7 +81,7 @@ Percentage of Anxiety
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Percentage of people reported taken medication for anxiety
+### Percentage of People Reported Taken Medication for Anxiety
 ```{r}
 anxiety %>%
   drop_na(worrx) %>% 
@@ -115,7 +115,7 @@ anxiety %>%
 Column {.tabset}
 -------------------------------------
 
-### By Biological sex
+### By Biological Sex
 ```{r}
 anxiety %>%
   drop_na(sex, worrx) %>% 
@@ -153,7 +153,7 @@ anxiety %>%
 
 ```
 
-### By household income to the poverty line ratio
+### By Household Income to The Poverty Line Ratio
 ```{r}
 anxiety %>%
   drop_na(poverty, worrx) %>% 
@@ -185,7 +185,7 @@ anxiety %>%
   
 ```
 
-### By martial status 
+### By Martial Status 
 ```{r}
 anxiety %>%
   drop_na(marst, worrx) %>% 
@@ -216,7 +216,7 @@ anxiety %>%
   )
 ```
 
-Age distribution
+Age Distribution
 =====================================
 
 ```{r}
@@ -242,7 +242,7 @@ Level and Frequency of Anxiety {data-orientation=columns}
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Level of anxiety
+### Level of Anxiety
 
 ```{r,echo = FALSE, message=FALSE}
 anxiety %>%
@@ -278,7 +278,7 @@ anxiety %>%
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Frequency of anxiety
+### Frequency of Anxiety
 
 ```{r,echo = FALSE, message=FALSE}
 anxiety %>% 
