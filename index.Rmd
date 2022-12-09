@@ -61,7 +61,6 @@ Mental health is an important part of overall health and well-being. Mental heal
 * What is the association between taking depression or anxious medication and COVID-19 exposure? 
 
 
-Let's begin with the general status of [mental illness](mental_illness.html)!
 
 # Mental Health Quiz {#quiz}
 
@@ -69,6 +68,9 @@ There are still many harmful attitudes and misunderstandings around mental illne
 <p align="center">
   [![Mental Health Quiz](image/mental health quiz pics.png){length=650 width=800}](https://www.cdc.gov/mentalhealth/quiz/index.htm)
 </p>
+
+
+Let's begin with the general status of [mental illness](mental_illness.html)!
 
 
 # Our Team {#team}
