@@ -11,7 +11,7 @@
 
 
 
-<title>Mental Health Post COVID-19 Pandemic</title>
+<title>backup</title>
 
 <script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,20 +29,15 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-<link rel="icon" type="image/jpeg" href="image/hearder_image.jpeg"/>
-
-
-<div class="hero-image"> 
-        <div class="image-text">
-           <div class="top-text"></div>
-            <div class="bottom-text">COVID-19 GOT YOU STRESSED?</div>
-        </div>
-</div>
+  <link rel="icon" type="image/png" href="image/icons-brain.png"/>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -238,6 +233,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -245,6 +303,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -356,167 +424,28 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Mental Health Post COVID-19 Pandemic</h1>
+<h1 class="title toc-ignore">backup</h1>
 
 </div>
 
 
-<style type="text/css">
-
-.main-container {
-  max-width: 80%;
-  margin: auto;
-}
-
-h1.title {
-  font-size: 60px;
-  text-align: center;
-  color: black;
-  font-weight: bold;
-}
-h1 { 
-  font-size: 50px;
-  text-align: left;
-  color: black;
-  font-weight: bold;
-}
-body{ 
-  font-size: 20px;
-}
-a{
-  color: black;
-  font-weight: bold;
-}
-
-</style>
+<div id="web" class="section level1">
+<h1>Website Introduction</h1>
+<hr />
 <center>
-<span style="color: grey; font-size:3em"><strong>Welcome to Our Project
-for P8105!</strong></span>
+<div class="container_video">
+<iframe width="800" height="500" src="https://www.youtube.com/embed/zNzZ1PfUDNk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
 </center>
-<hr />
-<table>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center"><img src="image/utube.png" height="300"
-alt="video" /></th>
-<th align="center"><img src="image/1.jpg" height="300"
-alt="motivation" /></th>
-<th align="center"><img src="image/quiz.png" height="300"
-alt="quiz" /></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><a href="#web"><span style="font-size:45px">Website
-Intro</span></a></td>
-<td align="center"><a href="#motivation"><span
-style="font-size:45px">Motivation</span></a></td>
-<td align="center"><a href="#quiz"><span
-style="font-size:45px">Quiz</span></a></td>
-</tr>
-<tr class="even">
-<td align="center"><a href="project_report.html"><img src="image/3.jpg"
-height="300" alt="data" /></a></td>
-<td align="center"><a href="analysis/project_report.html"><img
-src="image/report.png" height="300" alt="report" /></a></td>
-<td align="center"><a href="analysis/project_report.html"><img
-src="image/team.jpg" height="300" alt="team" /></a></td>
-</tr>
-<tr class="odd">
-<td align="center"><a href="data_process.html"><span
-style="font-size:45px">Data Source</span></a></td>
-<td align="center"><a href="project_report.html"><span
-style="font-size:45px">Report</span></a></td>
-<td align="center"><a href="#team"><span style="font-size:45px">Our
-Team</span></a></td>
-</tr>
-</tbody>
-</table>
 <p><span class="math inline">\(\quad\)</span> <span
 class="math inline">\(\quad\)</span></p>
-<div id="motivation" class="section level1">
-<h1>Motivation</h1>
-<hr />
-<p>Mental health is an important part of overall health and well-being.
-Mental health includes our emotional, psychological, and social
-well-being. Mental health problems exist frequently throughout the
-United States. About one in five adults suffer from a diagnosable mental
-illness in a given year. Many common mental illnesses, such as
-depression, anxiety, bipolar disorder, may increase risk of suicide.</p>
-<p><strong>So…</strong></p>
-<ul>
-<li>What is the general status of mental illness across states in the
-US?</li>
-<li>What is the overall trend of the percentage, frequency and level of
-anxiety and depression in the US across years?</li>
-<li>How do trends in anxiety and depression percentages differ by
-biological sex, household income, marital status, and age?</li>
-<li>What is the overall suicide trend across years? How does suicide
-differ by state, age, sex and means?</li>
-<li>What is the association between taking depression or anxious
-medication and COVID-19 exposure?</li>
-</ul>
-<p><span class="math inline">\(\quad\)</span> <span
-class="math inline">\(\quad\)</span></p>
-</div>
-<div id="quiz" class="section level1">
-<h1>Mental Health Quiz</h1>
-<hr />
-There are still many harmful attitudes and misunderstandings around
-mental illness, which may make people ignore their mental health, fuel
-stigma, and make it harder to reach out for help. Take the following
-quiz and see if you can separate the myths from the facts.
-<p align="center">
-<a href="https://www.cdc.gov/mentalhealth/quiz/index.htm"><img
-src="image/mental%20health%20quiz%20pics.png" length="650" width="800"
-alt="Mental Health Quiz" /></a>
-</p>
-<p><span class="math inline">\(\quad\)</span> <span
-class="math inline">\(\quad\)</span></p>
-</div>
-<div id="team" class="section level1">
-<h1>Our Team</h1>
-<hr />
-<table>
-<colgroup>
-<col width="23%" />
-<col width="12%" />
-<col width="21%" />
-<col width="21%" />
-<col width="21%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center"><a href="https://github.com/xiaof2">Fei Xiao</a></th>
-<th align="center"><a href="https://github.com/KellyLuo233">Kelly
-Luo</a></th>
-<th align="center"><a href="https://github.com/TongtongZhu12">Tongtong
-Zhu</a></th>
-<th align="center"><a href="https://github.com/yifang2605">Yi
-Fang</a></th>
-<th align="center"><a href="https://github.com/yh3429">Yujie
-Huang</a></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -549,6 +478,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
