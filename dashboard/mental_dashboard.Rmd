@@ -53,13 +53,13 @@ mental_df =
 ```
 
 
-Mental illness distribution
+Mental Illness Distribution
 =====================================
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Percent of adults reporting any mental illness  by state between 2019-2020
+### Percent of Adults Reporting Any Mental Illness by State Between 2019-2020
 ```{r} 
 state_mental =
   plot_usmap(
@@ -85,7 +85,7 @@ ggplotly(state_mental) %>%
 
 Column {.tabset}
 -------------------------------------
-### Any mental illness
+### Any Mental Illness
 ```{r}
 any_mental_plot = 
   mental_df %>% 
@@ -106,7 +106,7 @@ ggplotly(any_mental_plot)
 
 ```
 
-### Serious mental illness
+### Serious Mental Illness
 ```{r}
 ser_mental_plot =
   mental_df %>% 
@@ -126,7 +126,7 @@ ser_mental_plot =
 ggplotly(ser_mental_plot)
 ```
 
-### Top 10 states with any mental illness
+### Top 10 States with Any Mental Illness
 
 ```{r}
 any_top10_plot =
@@ -149,7 +149,7 @@ ggplotly(any_top10_plot)
 
 ```
 
-### Top 10 states with serious mental illness
+### Top 10 States with Serious Mental Illness
 
 ```{r}
 ser_top10_plot =
@@ -170,6 +170,4 @@ ser_top10_plot =
 
 ggplotly(ser_top10_plot)
 ```
-
-
 
