@@ -21,7 +21,7 @@ h1.title {
 }
 h1 { 
   font-size: 50px;
-  text-align: center;
+  text-align: left;
   color: black;
   font-weight: bold;
 }
@@ -39,15 +39,33 @@ a{
 
 ---
 
-| ![1](image/1.jpg){width=300, height=300} | ![2](image/2.jpg){width=300, height=300} | ![3](image/3.jpg){width=300, height=300} |
+| ![video](image/utube.png){width=300, height=300} | ![motivation](image/1.jpg){width=300, height=300} | ![quiz](image/quiz.png){width=300, height=300} |
 |:----------------------------------------:| :---------------------------------------:| :---------------------------------------:| 
-| [<span style="font-size:45px">Motivation</span>](#motivation) | [<span style="font-size:45px">Quiz</span>](#quiz) | [<span style="font-size:45px">Data Source</span>](project_report.html) |
-| [![4](image/4.jpg){width=300, height=300}](project_report.html)| [![5](image/5.jpg){width=300, height=300}](analysis/project_report.html) |[![6](image/6.jpg){width=300, height=300}](analysis/project_report.html)|
-| [<span style="font-size:45px">4</span>](analysis/project_report.html) | [<span style="font-size:45px">5</span>](project_report.html) | [<span style="font-size:45px">Our Team</span>](#team) |
+| [<span style="font-size:45px">Website Intro</span>](#web) | [<span style="font-size:45px">Motivation</span>](#motivation) | [<span style="font-size:45px">Quiz</span>](#quiz) |
+| [![data](image/3.jpg){width=300, height=300}](project_report.html)| [![report](image/report.png){width=300, height=300}](analysis/project_report.html) |[![team](image/team.jpg){width=300, height=300}](analysis/project_report.html)|
+| [<span style="font-size:45px">Data Source</span>](data_process.html) |[<span style="font-size:45px">Report</span>](project_report.html) | [<span style="font-size:45px">Our Team</span>](#team) |
+
+$\quad$
+$\quad$
+
+# Website Introduction {#web}
 
 ---
 
+<center><div class="container_video">
+<iframe width="800" height="500"
+src="https://www.youtube.com/embed/zNzZ1PfUDNk"
+frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div></center>
+
+$\quad$
+$\quad$
+
+
+
 # Motivation {#motivation}
+
+---
 
 Mental health is an important part of overall health and well-being. Mental health includes our emotional, psychological, and social well-being. Mental health problems exist frequently throughout the United States. About one in five adults suffer from a diagnosable mental illness in a given year. Many common mental illnesses, such as depression, anxiety, bipolar disorder, may increase risk of suicide.
 
@@ -60,9 +78,12 @@ Mental health is an important part of overall health and well-being. Mental heal
 * What is the overall suicide trend across years? How does suicide differ by state, age, sex and means?
 * What is the association between taking depression or anxious medication and COVID-19 exposure? 
 
-
+$\quad$
+$\quad$
 
 # Mental Health Quiz {#quiz}
+
+---
 
 There are still many harmful attitudes and misunderstandings around mental illness, which may make people ignore their mental health, fuel stigma, and make it harder to reach out for help. Take the following quiz and see if you can separate the myths from the facts.
 <p align="center">
@@ -72,8 +93,12 @@ There are still many harmful attitudes and misunderstandings around mental illne
 
 Let's begin with the general status of [mental illness](mental_illness.html)!
 
+$\quad$
+$\quad$
 
 # Our Team {#team}
+
+---
 
 
 |[Fei Xiao](https://github.com/xiaof2) |[Kelly Luo](https://github.com/KellyLuo233)  |[Tongtong Zhu](https://github.com/TongtongZhu12) |[Yi Fang](https://github.com/yifang2605)   |[Yujie Huang](https://github.com/yh3429)|
