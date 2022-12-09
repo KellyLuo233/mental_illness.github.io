@@ -69,27 +69,56 @@ National Center for Health Statistics, National Vital Statistics System, Mortali
 
 ## Data Cleaning
 
+### Mental Illness Data
+
+To understand the distribution of mental illness across states, we retrieved the mental illness data from the National Survey on Drug Use and Health (NSDUH),2019-2020. We focused on adults reporting any mental illness and adults reporting serious mental illness from 2019 to 2020. Number of adults reporting any mental illness and serious mental illness were rounded to the nearest 1,000. Serious mental illness (SMI) is defined as having a diagnosable mental, behavioral, or emotional disorder, other than a developmental or substance use disorder, as assessed by the Mental Health Surveillance Study (MHSS) Structured Clinical Interview for the Diagnostic and Statistical Manual of Mental Disorders. Estimates of SMI are a subset of estimates of any mental illness (AMI) because SMI is limited to people with AMI that resulted in serious functional impairment. The dataset included the mental illness data for 50 states and Washington D.C. The variables we focused were: 
+
+* `state`: U.S. state
+* `any_mental_num`: number of adults reporting any mental illness
+* `any_mental_per`: percent of adults reporting any mental illness
+* `ser_mental_num`: number of adults reporting serious mental illness
+* `ser_mental_per`: percent of adults reporting serious mental illness
+* `state_abb`: abbreviation of states
+* `region`: state regions, including northeast, south, west and north central
+
+```{r, message=FALSE}
+mental_df = 
+  read_csv("./data/mental_data.csv") %>% 
+  janitor::clean_names() %>% 
+  mutate(
+    any_mental_num = any_mental_num / 1000000,
+    any_mental_per = any_mental_per * 100,
+    ser_mental_num = ser_mental_num / 1000000,
+    ser_mental_per = ser_mental_per * 100,
+    state_abb = state.abb[match(state, state.name)],
+    region = state.region[match(state, state.name)]
+  ) %>% 
+  mutate(
+    state_abb = replace(state_abb, state == "District of Columbia", "DC"))
+```
+
+### Anxiety and Depression Data
+
 We pulled out data from IPUMS Health Surveys: NHIS and will limit our analysis using data from 2015 to 2021. To analyze the trend of anxiety prevalence, frequency and level from 2015 to 2021, we will focus on anxiety indicators listed below:
 
-- WORFREQ:How often feel worried, nervous, or anxious
-- WORRX: Take medication for worried, nervous, or anxious feelings
-- WORFEELEVL: Level of worried, nervous, or anxious feelings, last time
+- `WORFREQ`:How often feel worried, nervous, or anxious
+- `WORRX`: Take medication for worried, nervous, or anxious feelings
+- `WORFEELEVL`: Level of worried, nervous, or anxious feelings, last time
 
 To analyze the trend of depression prevalence, frequency and level from 2015 to 2021, we will focus on depression indicators listed below:
 
-- DEPRX:Take medication for depression
-- DEPFREQ:How often feel depressed
-- DEPFEELEVL: Level of depression, last time depressed
+- `DEPRX`:Take medication for depression
+- `DEPFREQ`:How often feel depressed
+- `DEPFEELEVL`: Level of depression, last time depressed
 
 Core demographic and Social economic status indicators listed below are also included in this analysis:
 
-- AGE:Age, individuals with age above 85 is excluded from analysis as 85 is the top code.
-- SEX:Biological sex
-- MARST:Current marital status
-- POVERTY:Ratio of family income to poverty threshold
+- `AGE`:Age, individuals with age above 85 is excluded from analysis as 85 is the top code.
+- `SEX`:Biological sex
+- `MARST`:Current marital status
+- `POVERTY`:Ratio of family income to poverty threshold
 
 Responses indicate Unknown or not applied are excluded from our analysis.
-
 ```{r, message=FALSE}
 anx_dep = 
   read_csv("data/nhis_data01.csv") %>% 
@@ -139,6 +168,66 @@ anx_dep =
     age = ifelse(age>=85, NA, age)
     )
 ```
+
+### Suicide Data
+
+To understand the distribution of suicides across states, we retrieved the suicide data from the online CDC WONDER database,2014-2020. The suicide number is the number of per 100,000 population. The suicide rate is the suicide per 100,000 population. To analyze the overall trend of suicide in the US and the difference in suicide rate by age, gender, and means of suicide, we collected the suicide data from the National Vital Statistics System, Mortality. The age groups excluded the suicide number for people aged 5-9 years. Although suicides for those aged 5-9 years were included in total numbers, they were not included as a studied age group because of the small number of suicides per year in this age group. We focused on 20 years of suicide data from 2000 to 2020, and paid more attention to the changes in suicide trends in recent years (2018-2020). The key variables in the dataset were:
+
+* `year`: year, 2000-2020
+* `state`: U.S. state
+* `sex`: sex group, including female and male
+* `age`: age group, including 10-14, 15-24, 25-44, 45-64, 65-74, 75+
+* `suicide_no`: number of suicide per 100,000 population
+* `suicide_100k`: suicide rate (suicide per 100k)
+* `means`: means of suicide, including firearm, poisoning, suffocation and others
+
+```{r, message=FALSE}
+suicide_df = 
+  read_excel(
+    "./data/suicide_data.xlsx",
+    sheet = 1,
+    col_names = TRUE) %>% 
+  janitor::clean_names() %>% 
+  mutate(
+    population = (suicide_no / suicide_100k) * 100000, 
+    sex = as.factor(sex),
+    age = as.factor(age)
+  )
+
+average_20years = sum(suicide_df$suicide_no) / sum(suicide_df$population) * 100000
+
+suicide_state_df = 
+  read_excel(
+    "./data/suicide_data.xlsx",
+    sheet = 2,
+    range = "A1:D351",
+    skip = 1,
+    col_names = TRUE) %>% 
+  janitor::clean_names() %>% 
+  rename(
+     suicide_no = deaths,
+     suicide_100k = death_rate) %>% 
+  mutate(
+    population = (suicide_no / suicide_100k) * 100000
+  )
+  
+suicide_means_df =
+   read_excel(
+    "./data/suicide_data.xlsx",
+    sheet = 3,
+    col_names = TRUE) %>% 
+  janitor::clean_names() %>% 
+  pivot_longer(
+    firearm:others,
+    names_to = "means",
+    values_to = "rate"
+  ) %>% 
+  mutate(
+       sex = as.factor(sex),
+       means = as.factor(means)) 
+  
+```
+
 
 
 
