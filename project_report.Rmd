@@ -1,5 +1,5 @@
 ---
-title: "Project Report"
+title: "Project Report: Mental Health Post COVID-19 Pandemic"
 output: 
   html_document:
     theme: journal
@@ -9,6 +9,8 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
+
+**Fei Xiao, Kelly Luo, Tongtong Zhu, Yi Fang, Yujie Huang**
 
  
 ```{r setup, include=FALSE}
