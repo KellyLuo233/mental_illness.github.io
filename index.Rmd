@@ -8,6 +8,7 @@ output:
       in_header: hero-image.html
 ---
 <style type="text/css">
+
 .main-container {
   max-width: 80%;
   margin: auto;
